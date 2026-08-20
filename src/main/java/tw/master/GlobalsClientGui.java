@@ -154,7 +154,7 @@ public class GlobalsClientGui implements EventInterface, EngineEventsInterface {
         JPanel imagePanelAndTools = new JPanel(new BorderLayout());
 
         this.ip = new ImagePanel("ClientImage", engine.img, engine.imgOverlay);
-        this.ip.writeImage = true;
+        this.ip.writeImage = false;
 
         ip.setBorder(new TitledBorder("Image"));
         ip.addEventReceiver(this);
