@@ -12,6 +12,18 @@ selection (i.e. evolution), with a 3D visualisation of the resulting brains/netw
 practical component of my 2011 master thesis
 (see [Master-Thesis/Master–Thesis-Thomas-Welsch_2011_06_14.pdf](Master-Thesis/Master–Thesis-Thomas-Welsch_2011_06_14.pdf)).
 
+## Screenshots
+
+| Evolved 3D brain visualisation | Live crawler dashboard (fitness, EEG, path trace) |
+|---|---|
+| ![Evolved 3D brain](Master-Thesis/Bilder.Export/Dump-BrainComplex.png) | ![Crawler dashboard](Master-Thesis/Bilder.Export/Dump-SelectedCrawler-Big.png) |
+
+Architecture overview (from the thesis):
+
+![Architecture overview](Master-Thesis/Bilder.Export/Architektur-Uebersicht.png)
+
+More figures are available under [Master-Thesis/Bilder.Export/](Master-Thesis/Bilder.Export/).
+
 ## Status
 
 Fully functional again after modernization: main sources compile, `mvn test` passes all suites,
