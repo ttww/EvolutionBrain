@@ -26,11 +26,14 @@ More figures are available under [Master-Thesis/Bilder.Export/](Master-Thesis/Bi
 
 ## Video
 
-[![Trail-following demo video](evolutionbrain_web_site/evolutionbrain.sourceforge.net/videos/tracefollow.jpg)](evolutionbrain_web_site/evolutionbrain.sourceforge.net/videos/tracefollow.mp4)
+GitHub can't play video files inline in a README, so here's an animated preview (first 8s, no audio)
+of the trail-following demo:
 
-Click the thumbnail above for the trail-following demo
-([MP4](evolutionbrain_web_site/evolutionbrain.sourceforge.net/videos/tracefollow.mp4) /
-[OGG](evolutionbrain_web_site/evolutionbrain.sourceforge.net/videos/tracefollow.ogg)). A second,
+![Trail-following demo preview](evolutionbrain_web_site/evolutionbrain.sourceforge.net/videos/tracefollow-preview.gif)
+
+Full-quality video:
+[MP4](evolutionbrain_web_site/evolutionbrain.sourceforge.net/videos/tracefollow.mp4) /
+[OGG](evolutionbrain_web_site/evolutionbrain.sourceforge.net/videos/tracefollow.ogg). A second,
 longer capture of a live run is available as
 [film/AAAA_ClientImage.mp4](film/AAAA_ClientImage.mp4) /
 [film/AAAA_ClientImage.webm](film/AAAA_ClientImage.webm).
