@@ -85,12 +85,13 @@
    - Do not swap the custom `Brain`/`Neuron`/`Synapse` model for an external neural-network library (e.g.
      DL4J, Deeplearning libs) — the thesis's value is in its own implementation.
    - Do not restructure packages/classes beyond what's needed to compile/run on modern JDK + JOGL.
-6. **Website redesign**
-   - The old project site under [evolutionbrain_web_site/evolutionbrain.sourceforge.net/](evolutionbrain_web_site/evolutionbrain.sourceforge.net/)
-     is 2011-era static HTML/CSS (SourceForge-hosted look & feel) and needs a complete redesign with current
-     styles/structure (responsive layout, modern CSS, updated content) rather than incremental patching.
-   - Content (project description, screenshots, thesis link, downloads) should be preserved/migrated, but the
-     markup/styling should be rebuilt from scratch.
+6. ✅ **Website redesign** — done. The old jQuery/jQuery-UI ("ui-darkness" theme) site under
+   [evolutionbrain_web_site/evolutionbrain.sourceforge.net/](evolutionbrain_web_site/evolutionbrain.sourceforge.net/)
+   was rebuilt from scratch as responsive semantic HTML5 + a small hand-written `css/style.css` (no
+   external JS framework needed for the tabs anymore — vanilla JS + `:target`-friendly anchors). All
+   original content (background, screenshots, video, getting-started, download, contact/impressum —
+   legal text preserved verbatim) was migrated; download/starting sections were updated to point at
+   the current GitHub repo and Maven workflow instead of the dead SourceForge/SVN links.
 7. **Media asset conversion**
    - The `.mov` files under [film/](film/) (e.g. `AAAA_ClientImage.png.png.mov`) are legacy QuickTime
      captures and should be converted to a modern, widely-supported format/codec (e.g. H.264/H.265 MP4 or

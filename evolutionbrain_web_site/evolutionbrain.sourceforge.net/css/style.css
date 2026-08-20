@@ -1,0 +1,186 @@
+/* EvolutionBrain — modern site styles (2026 redesign, replaces jQuery UI "ui-darkness" theme) */
+
+:root {
+	--bg: #0d0d0d;
+	--panel: #1a1a1a;
+	--panel-alt: #141414;
+	--accent: #f58400;
+	--accent-light: #ffaf3d;
+	--text: #eeeeee;
+	--text-dim: #a8a8a8;
+	--border: #333333;
+	--radius: 10px;
+	--max-width: 960px;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	background: var(--bg);
+	color: var(--text);
+	font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+	line-height: 1.5;
+}
+
+header.site-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 1rem;
+	max-width: var(--max-width);
+	margin: 0 auto;
+	padding: 2rem 1.25rem 1rem;
+}
+
+header.site-header h1 {
+	margin: 0;
+	font-size: 2rem;
+}
+
+header.site-header img.logo {
+	height: 70px;
+}
+
+.archive-banner {
+	max-width: var(--max-width);
+	margin: 0 auto 1.5rem;
+	padding: 0.75rem 1.25rem;
+	background: var(--panel-alt);
+	border: 1px solid var(--accent);
+	border-radius: var(--radius);
+	font-size: 0.95rem;
+	color: var(--text-dim);
+}
+
+.archive-banner a {
+	color: var(--accent-light);
+}
+
+nav.tabs {
+	max-width: var(--max-width);
+	margin: 0 auto;
+	padding: 0 1.25rem;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	border-bottom: 1px solid var(--border);
+}
+
+nav.tabs a {
+	display: inline-block;
+	padding: 0.6rem 1rem;
+	color: var(--text-dim);
+	text-decoration: none;
+	border-radius: var(--radius) var(--radius) 0 0;
+	border: 1px solid transparent;
+}
+
+nav.tabs a:hover {
+	color: var(--text);
+}
+
+nav.tabs a.active {
+	color: #fff;
+	background: var(--panel);
+	border-color: var(--border);
+	border-bottom-color: var(--panel);
+	margin-bottom: -1px;
+}
+
+main {
+	max-width: var(--max-width);
+	margin: 0 auto;
+	padding: 1.5rem 1.25rem 3rem;
+}
+
+section.tab-panel {
+	display: none;
+}
+
+section.tab-panel.active {
+	display: block;
+}
+
+.block-header {
+	font-weight: bold;
+	color: #fff;
+	background: var(--accent);
+	border: 1px solid var(--accent-light);
+	border-radius: var(--radius);
+	padding: 0.5rem 1rem;
+	margin: 1.5rem 0 0.5rem;
+}
+
+.block-content {
+	background: var(--panel);
+	border-radius: var(--radius);
+	padding: 1rem;
+	margin-bottom: 0.5rem;
+}
+
+.block-content ul {
+	margin: 0.25rem 0;
+	padding-left: 1.25rem;
+}
+
+.block-content a {
+	color: var(--accent-light);
+}
+
+.screenshot-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+	gap: 1rem;
+}
+
+.screenshot-grid a {
+	display: block;
+	background: var(--panel-alt);
+	border-radius: var(--radius);
+	padding: 0.5rem;
+	text-align: center;
+}
+
+.screenshot-grid img {
+	max-width: 100%;
+	height: auto;
+	border-radius: 6px;
+}
+
+video {
+	max-width: 100%;
+	border-radius: var(--radius);
+}
+
+.impressum {
+	font-size: 0.85rem;
+	color: var(--text-dim);
+	background: var(--panel-alt);
+	border-radius: var(--radius);
+	padding: 1rem;
+	margin-bottom: 0.75rem;
+}
+
+table.links {
+	border-collapse: collapse;
+}
+
+table.links td {
+	padding: 0.35rem 1rem 0.35rem 0;
+}
+
+footer {
+	text-align: center;
+	color: var(--text-dim);
+	font-size: 0.85rem;
+	padding: 1.5rem 0;
+}
