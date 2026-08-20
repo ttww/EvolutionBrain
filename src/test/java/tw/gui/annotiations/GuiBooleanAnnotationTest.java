@@ -22,11 +22,10 @@ package tw.gui.annotiations;
 
 import javax.swing.JFrame;
 
-import junit.framework.Assert;
-
 import org.assertj.swing.fixture.FrameFixture;
 import org.junit.Test;
 
+import junit.framework.Assert;
 import tw.master.utils.Utils;
 
 

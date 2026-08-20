@@ -1,147 +1,157 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.EvolutionBrain</groupId>
-	<artifactId>EvolutionBrain</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>EvolutionBrain</name>
-	<description>Neuronal evolution driven by mutation and selection
-	</description>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.EvolutionBrain</groupId>
+    <artifactId>EvolutionBrain</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>EvolutionBrain</name>
+    <description>Neuronal evolution driven by mutation and selection
+    </description>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<maven.compiler.release>17</maven.compiler.release>
-		<jogl.version>2.6.0</jogl.version>
-		<!-- Overridden per-OS/arch by the profiles below. -->
-		<jogl.natives.classifier>natives-macosx-universal</jogl.natives.classifier>
-	</properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.release>17</maven.compiler.release>
+        <jogl.version>2.6.0</jogl.version>
+        <!-- Overridden per-OS/arch by the profiles below. -->
+        <jogl.natives.classifier>natives-macosx-universal</jogl.natives.classifier>
+    </properties>
 
-	<dependencies>
-		<!-- Modern JogAmp JOGL/GlueGen (replaces the 2011 vendored com.EvolutionBrain:* jars). -->
-		<dependency>
-			<groupId>org.jogamp.gluegen</groupId>
-			<artifactId>gluegen-rt</artifactId>
-			<version>${jogl.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.jogamp.gluegen</groupId>
-			<artifactId>gluegen-rt</artifactId>
-			<version>${jogl.version}</version>
-			<classifier>${jogl.natives.classifier}</classifier>
-		</dependency>
-		<dependency>
-			<groupId>org.jogamp.jogl</groupId>
-			<artifactId>jogl-all</artifactId>
-			<version>${jogl.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.jogamp.jogl</groupId>
-			<artifactId>jogl-all</artifactId>
-			<version>${jogl.version}</version>
-			<classifier>${jogl.natives.classifier}</classifier>
-		</dependency>
+    <dependencies>
+        <!-- Modern JogAmp JOGL/GlueGen (replaces the 2011 vendored com.EvolutionBrain:* jars). -->
+        <dependency>
+            <groupId>org.jogamp.gluegen</groupId>
+            <artifactId>gluegen-rt</artifactId>
+            <version>${jogl.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jogamp.gluegen</groupId>
+            <artifactId>gluegen-rt</artifactId>
+            <version>${jogl.version}</version>
+            <classifier>${jogl.natives.classifier}</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.jogamp.jogl</groupId>
+            <artifactId>jogl-all</artifactId>
+            <version>${jogl.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jogamp.jogl</groupId>
+            <artifactId>jogl-all</artifactId>
+            <version>${jogl.version}</version>
+            <classifier>${jogl.natives.classifier}</classifier>
+        </dependency>
 
-		<dependency>
-			<groupId>org.jmdns</groupId>
-			<artifactId>jmdns</artifactId>
-			<version>3.6.3</version>
-		</dependency>
+        <dependency>
+            <groupId>org.jmdns</groupId>
+            <artifactId>jmdns</artifactId>
+            <version>3.6.3</version>
+        </dependency>
 
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.13.2</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-core</artifactId>
-			<version>4.11.0</version>
-			<scope>test</scope>
-		</dependency>
-		<!-- Replaces the dead fest-swing (1.2); same API under org.assertj.swing.* package. -->
-		<dependency>
-			<groupId>org.assertj</groupId>
-			<artifactId>assertj-swing-junit</artifactId>
-			<version>3.17.1</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jogamp.jocl</groupId>
-			<artifactId>jocl</artifactId>
-			<version>${jogl.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jogamp.jocl</groupId>
-			<artifactId>jocl</artifactId>
-			<version>${jogl.version}</version>
-			<classifier>${jogl.natives.classifier}</classifier>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>4.11.0</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- Replaces the dead fest-swing (1.2); same API under org.assertj.swing.* package. -->
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-swing-junit</artifactId>
+            <version>3.17.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jogamp.jocl</groupId>
+            <artifactId>jocl</artifactId>
+            <version>${jogl.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jogamp.jocl</groupId>
+            <artifactId>jocl</artifactId>
+            <version>${jogl.version}</version>
+            <classifier>${jogl.natives.classifier}</classifier>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>3.5.0</version>
-				<configuration>
-					<mainClass>tw.master.MasterProofMain</mainClass>
-					<!-- JOGL reflectively probes sun.awt.AppContext on AWT init; without
-					     this the app still runs (JOGL catches the failure) but logs noisy
-					     InaccessibleObjectException traces. -->
-					<options>
-						<option>--add-opens</option>
-						<option>java.desktop/sun.awt=ALL-UNNAMED</option>
-					</options>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.5.0</version>
+                <configuration>
+                    <mainClass>tw.master.MasterProofMain</mainClass>
+                    <!-- JOGL reflectively probes sun.awt.AppContext on AWT init; without
+                    this the app still runs (JOGL catches the failure) but logs noisy
+                    InaccessibleObjectException traces. -->
+                    <options>
+                        <option>--add-opens</option>
+                        <option>java.desktop/sun.awt=ALL-UNNAMED</option>
+                    </options>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
-	<!-- Selects the right JogAmp natives jar (gluegen-rt/jogl-all/jocl classifier) for the
-	     build machine's OS/arch; only macOS is exercised so far, the others are best-effort. -->
-	<profiles>
-		<profile>
-			<id>natives-macos</id>
-			<activation>
-				<os><family>mac</family></os>
-			</activation>
-			<properties>
-				<jogl.natives.classifier>natives-macosx-universal</jogl.natives.classifier>
-			</properties>
-		</profile>
-		<profile>
-			<id>natives-linux-amd64</id>
-			<activation>
-				<os><name>Linux</name><arch>amd64</arch></os>
-			</activation>
-			<properties>
-				<jogl.natives.classifier>natives-linux-amd64</jogl.natives.classifier>
-			</properties>
-		</profile>
-		<profile>
-			<id>natives-linux-aarch64</id>
-			<activation>
-				<os><name>Linux</name><arch>aarch64</arch></os>
-			</activation>
-			<properties>
-				<jogl.natives.classifier>natives-linux-aarch64</jogl.natives.classifier>
-			</properties>
-		</profile>
-		<profile>
-			<id>natives-windows</id>
-			<activation>
-				<os><family>windows</family></os>
-			</activation>
-			<properties>
-				<jogl.natives.classifier>natives-windows-amd64</jogl.natives.classifier>
-			</properties>
-		</profile>
-	</profiles>
+    <!-- Selects the right JogAmp natives jar (gluegen-rt/jogl-all/jocl classifier) for the
+    build machine's OS/arch; only macOS is exercised so far, the others are best-effort. -->
+    <profiles>
+        <profile>
+            <id>natives-macos</id>
+            <activation>
+                <os>
+                    <family>mac</family>
+                </os>
+            </activation>
+            <properties>
+                <jogl.natives.classifier>natives-macosx-universal</jogl.natives.classifier>
+            </properties>
+        </profile>
+        <profile>
+            <id>natives-linux-amd64</id>
+            <activation>
+                <os>
+                    <name>Linux</name>
+                    <arch>amd64</arch>
+                </os>
+            </activation>
+            <properties>
+                <jogl.natives.classifier>natives-linux-amd64</jogl.natives.classifier>
+            </properties>
+        </profile>
+        <profile>
+            <id>natives-linux-aarch64</id>
+            <activation>
+                <os>
+                    <name>Linux</name>
+                    <arch>aarch64</arch>
+                </os>
+            </activation>
+            <properties>
+                <jogl.natives.classifier>natives-linux-aarch64</jogl.natives.classifier>
+            </properties>
+        </profile>
+        <profile>
+            <id>natives-windows</id>
+            <activation>
+                <os>
+                    <family>windows</family>
+                </os>
+            </activation>
+            <properties>
+                <jogl.natives.classifier>natives-windows-amd64</jogl.natives.classifier>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>

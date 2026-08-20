@@ -26,6 +26,8 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelListener;
 
+import javax.swing.JPanel;
+
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GL2ES1;
@@ -38,11 +40,9 @@ import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.awt.GLJPanel;
 import com.jogamp.opengl.fixedfunc.GLLightingFunc;
 import com.jogamp.opengl.fixedfunc.GLMatrixFunc;
-import javax.swing.JPanel;
+import com.jogamp.opengl.util.gl2.GLUT;
 
 import tw.master.utils.Utils;
-
-import com.jogamp.opengl.util.gl2.GLUT;
 
 
 @SuppressWarnings("serial")
