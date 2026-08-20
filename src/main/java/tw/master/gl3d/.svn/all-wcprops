@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/repo/!svn/ver/12650/develop/EvolutionBrain/src/main/java/tw/master/gl3d
+END
+World3dInterface.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/repo/!svn/ver/14845/develop/EvolutionBrain/src/main/java/tw/master/gl3d/World3dInterface.java
+END
+Panel3dFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/repo/!svn/ver/14845/develop/EvolutionBrain/src/main/java/tw/master/gl3d/Panel3dFactory.java
+END
+View.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/repo/!svn/ver/14845/develop/EvolutionBrain/src/main/java/tw/master/gl3d/View.java
+END
+OpenGL3dImplementation.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/repo/!svn/ver/14845/develop/EvolutionBrain/src/main/java/tw/master/gl3d/OpenGL3dImplementation.java
+END
+PurJava3dImplementation.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/repo/!svn/ver/14845/develop/EvolutionBrain/src/main/java/tw/master/gl3d/PurJava3dImplementation.java
+END
+World3dDrawInterface.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/repo/!svn/ver/14845/develop/EvolutionBrain/src/main/java/tw/master/gl3d/World3dDrawInterface.java
+END

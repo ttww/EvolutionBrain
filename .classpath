@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
+	<classpathentry kind="src" path="src/test/java"/>
+	<classpathentry kind="src" path="src/test/resources"/>
+	<classpathentry kind="con" path="org.maven.ide.eclipse.MAVEN2_CLASSPATH_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/gluegen-rt.jar">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="EvolutionBrain/lib/arch/macosx-universal"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/jmdns.jar"/>
+	<classpathentry kind="lib" path="lib/jocl.jar">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="EvolutionBrain/lib/arch/macosx-universal"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/jogl.all.jar">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="EvolutionBrain/lib/arch/macosx-universal"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/nativewindow.all.jar">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="EvolutionBrain/lib/arch/macosx-universal"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/FEST"/>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>

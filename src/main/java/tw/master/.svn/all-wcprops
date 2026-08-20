@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/repo/!svn/ver/11970/develop/EvolutionBrain/src/main/java/tw/master
+END
+GlobalsClientGui.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/repo/!svn/ver/14573/develop/EvolutionBrain/src/main/java/tw/master/GlobalsClientGui.java
+END
+EvolutionBrainClientMain.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/repo/!svn/ver/14032/develop/EvolutionBrain/src/main/java/tw/master/EvolutionBrainClientMain.java
+END
+MasterProofMain.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/repo/!svn/ver/13228/develop/EvolutionBrain/src/main/java/tw/master/MasterProofMain.java
+END
+TestBrainCrawlerMain.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/repo/!svn/ver/13228/develop/EvolutionBrain/src/main/java/tw/master/TestBrainCrawlerMain.java
+END
+GlobalsServerGui.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/repo/!svn/ver/14845/develop/EvolutionBrain/src/main/java/tw/master/GlobalsServerGui.java
+END
+EvolutionBrainServerMain.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/repo/!svn/ver/14032/develop/EvolutionBrain/src/main/java/tw/master/EvolutionBrainServerMain.java
+END
+EvolutionBrainStarterInterface.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/repo/!svn/ver/13228/develop/EvolutionBrain/src/main/java/tw/master/EvolutionBrainStarterInterface.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/repo/!svn/ver/13228/develop/EvolutionBrain/src/main/java/tw/master/package-info.java
+END
+UpdateThread.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/repo/!svn/ver/14845/develop/EvolutionBrain/src/main/java/tw/master/UpdateThread.java
+END

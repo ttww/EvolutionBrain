@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/repo/!svn/ver/11870/develop/EvolutionBrain/src/main/java/tw/master/brain
+END
+Synapse.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/repo/!svn/ver/14845/develop/EvolutionBrain/src/main/java/tw/master/brain/Synapse.java
+END
+NeuronCluster.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/repo/!svn/ver/14845/develop/EvolutionBrain/src/main/java/tw/master/brain/NeuronCluster.java
+END
+Brain.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/repo/!svn/ver/14845/develop/EvolutionBrain/src/main/java/tw/master/brain/Brain.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/repo/!svn/ver/13228/develop/EvolutionBrain/src/main/java/tw/master/brain/package-info.java
+END
+Neuron.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/repo/!svn/ver/14031/develop/EvolutionBrain/src/main/java/tw/master/brain/Neuron.java
+END
+PotRunArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/repo/!svn/ver/14845/develop/EvolutionBrain/src/main/java/tw/master/brain/PotRunArray.java
+END
+FloatingArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/repo/!svn/ver/12657/develop/EvolutionBrain/src/main/java/tw/master/brain/FloatingArray.java
+END

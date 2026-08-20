@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/repo/!svn/ver/10636/develop/EvolutionBrain/lib/arch/linux-amd64
+END
+libopenal.so
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/repo/!svn/ver/10636/develop/EvolutionBrain/lib/arch/linux-amd64/libopenal.so
+END
+libgluegen-rt.so
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/repo/!svn/ver/10636/develop/EvolutionBrain/lib/arch/linux-amd64/libgluegen-rt.so
+END
+libjoal.so
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/repo/!svn/ver/10636/develop/EvolutionBrain/lib/arch/linux-amd64/libjoal.so
+END
+libnativewindow_x11.so
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/repo/!svn/ver/10636/develop/EvolutionBrain/lib/arch/linux-amd64/libnativewindow_x11.so
+END
+libjogl_es2.so
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/repo/!svn/ver/10636/develop/EvolutionBrain/lib/arch/linux-amd64/libjogl_es2.so
+END
+libjogl_es1.so
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/repo/!svn/ver/10636/develop/EvolutionBrain/lib/arch/linux-amd64/libjogl_es1.so
+END
+libjocl.so
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/repo/!svn/ver/10636/develop/EvolutionBrain/lib/arch/linux-amd64/libjocl.so
+END
+libjogl_desktop.so
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/repo/!svn/ver/10636/develop/EvolutionBrain/lib/arch/linux-amd64/libjogl_desktop.so
+END
+libnativewindow_awt.so
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/repo/!svn/ver/10636/develop/EvolutionBrain/lib/arch/linux-amd64/libnativewindow_awt.so
+END

@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/repo/!svn/ver/10636/develop/EvolutionBrain/lib/arch/windows-amd64
+END
+jocl.dll
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/repo/!svn/ver/10636/develop/EvolutionBrain/lib/arch/windows-amd64/jocl.dll
+END
+jogl_es1.dll
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/repo/!svn/ver/10636/develop/EvolutionBrain/lib/arch/windows-amd64/jogl_es1.dll
+END
+jogl_es2.dll
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/repo/!svn/ver/10636/develop/EvolutionBrain/lib/arch/windows-amd64/jogl_es2.dll
+END
+joal.dll
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/repo/!svn/ver/10636/develop/EvolutionBrain/lib/arch/windows-amd64/joal.dll
+END
+nativewindow_win32.dll
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/repo/!svn/ver/10636/develop/EvolutionBrain/lib/arch/windows-amd64/nativewindow_win32.dll
+END
+gluegen-rt.dll
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/repo/!svn/ver/10636/develop/EvolutionBrain/lib/arch/windows-amd64/gluegen-rt.dll
+END
+OpenAL32.dll
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/repo/!svn/ver/10636/develop/EvolutionBrain/lib/arch/windows-amd64/OpenAL32.dll
+END
+wrap_oal.dll
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/repo/!svn/ver/10636/develop/EvolutionBrain/lib/arch/windows-amd64/wrap_oal.dll
+END
+nativewindow_awt.dll
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/repo/!svn/ver/10636/develop/EvolutionBrain/lib/arch/windows-amd64/nativewindow_awt.dll
+END
+jogl_desktop.dll
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/repo/!svn/ver/10636/develop/EvolutionBrain/lib/arch/windows-amd64/jogl_desktop.dll
+END

@@ -1,0 +1,113 @@
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/repo/!svn/ver/11919/develop/EvolutionBrain/src/main/java/tw/master/utils
+END
+EventDispatchThreadHangMonitor.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/repo/!svn/ver/14845/develop/EvolutionBrain/src/main/java/tw/master/utils/EventDispatchThreadHangMonitor.java
+END
+Rnd.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/repo/!svn/ver/14845/develop/EvolutionBrain/src/main/java/tw/master/utils/Rnd.java
+END
+SoundUtils.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/repo/!svn/ver/14845/develop/EvolutionBrain/src/main/java/tw/master/utils/SoundUtils.java
+END
+SimpleDate.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/repo/!svn/ver/14845/develop/EvolutionBrain/src/main/java/tw/master/utils/SimpleDate.java
+END
+GuiStartStopStepThread.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/repo/!svn/ver/14845/develop/EvolutionBrain/src/main/java/tw/master/utils/GuiStartStopStepThread.java
+END
+ObjectClone.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/repo/!svn/ver/10527/develop/EvolutionBrain/src/main/java/tw/master/utils/ObjectClone.java
+END
+UpdateListenerInterface.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/repo/!svn/ver/14845/develop/EvolutionBrain/src/main/java/tw/master/utils/UpdateListenerInterface.java
+END
+JmDnsListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/repo/!svn/ver/14845/develop/EvolutionBrain/src/main/java/tw/master/utils/JmDnsListener.java
+END
+PreferencesUtils.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/repo/!svn/ver/14845/develop/EvolutionBrain/src/main/java/tw/master/utils/PreferencesUtils.java
+END
+AbstractStartStopStepThread.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/repo/!svn/ver/14845/develop/EvolutionBrain/src/main/java/tw/master/utils/AbstractStartStopStepThread.java
+END
+ServerStartStopStepThread.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/repo/!svn/ver/14845/develop/EvolutionBrain/src/main/java/tw/master/utils/ServerStartStopStepThread.java
+END
+FastByteArrayOutputStream.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/repo/!svn/ver/13228/develop/EvolutionBrain/src/main/java/tw/master/utils/FastByteArrayOutputStream.java
+END
+ResourceWatcherPanel.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/repo/!svn/ver/14845/develop/EvolutionBrain/src/main/java/tw/master/utils/ResourceWatcherPanel.java
+END
+FastByteArrayInputStream.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/repo/!svn/ver/13228/develop/EvolutionBrain/src/main/java/tw/master/utils/FastByteArrayInputStream.java
+END
+TerminateListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/repo/!svn/ver/14845/develop/EvolutionBrain/src/main/java/tw/master/utils/TerminateListener.java
+END
+JmDnsHelper.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/repo/!svn/ver/14845/develop/EvolutionBrain/src/main/java/tw/master/utils/JmDnsHelper.java
+END
+MessageInterface.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/repo/!svn/ver/14845/develop/EvolutionBrain/src/main/java/tw/master/utils/MessageInterface.java
+END
+Utils.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/repo/!svn/ver/13228/develop/EvolutionBrain/src/main/java/tw/master/utils/Utils.java
+END

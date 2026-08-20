@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>EvolutionBrain</title>
+		<link rel="icon" href="Brain.ico" type="image/x-icon">
+		<link type="text/css" href="css/ui-darkness/jquery-ui-1.8.13.custom.css" rel="stylesheet" />	
+		<script type="text/javascript" src="js/jquery-1.5.1.js"></script>
+		<!-- <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script> -->
+		<script type="text/javascript" src="js/jquery-ui-1.8.13.custom.min.js"></script>
+		<script type="text/javascript">
+			$(function(){
+
+				// Accordion
+				$("#accordion").accordion({ header: "h2" });
+	
+				// Tabs
+				$('#tabs').tabs();
+
+			});
+		</script>
+
+		<style type="text/css">
+			/*demo page css*/
+			body { font: 100% "Trebuchet MS", sans-serif; margin: 50px; background-color: rgb(0, 0, 0); color: rgb(255,255, 255);}
+			.content	{ font: 110% "Trebuchet MS", sans-serif; margin: 0em 20px 1em 20px; background-color: rgb(33, 33, 33); }
+			.headerxxx	{ font: 120% "Trebuchet MS", sans-serif; margin: 2em 20px 1em 20px; }
+			.header		{ font: 120% "Trebuchet MS", sans-serif; margin: 2em 20px 1em 20px; border: 1px solid #ffaf0f; color: #eeeeee;  background: #f58400 url(css/ui-darkness/images/ui-bg_inset-soft_30_f58400_1x100.png) 50% 50% repeat-x; font-weight: bold; color: #ffffff; }
+			.impressum	{ font: 80% "Trebuchet MS", sans-serif; margin: 2em 20px 1em 20px; background-color: rgb(20, 20, 20); }
+
+			.logo		{ position: absolute;right: 23px; top: 10px; }
+			
+			.screedump { margin: 0 5px 0 0; }
+			#dialog_link {padding: .4em 1em .4em 20px;text-decoration: none;position: relative;}
+			#dialog_link span.ui-icon {margin: 0 5px 0 0;position: absolute;left: .2em;top: 50%;margin-top: -8px;}
+		</style>	
+	</head>
+	<body>
+
+	<h1>Welcome to EvolutionBrain !</h1>
+	<img class="logo" src="images/Brain.png" height="90px" >
+
+		<!-- Accordion -->
+		<!--
+		<div id="accordion">
+		
+			<div>
+				<h3><a href="#">First</a></h3>
+				<div>Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</div>
+			</div>
+			<div>
+				<h3><a href="#">Second</a></h3>
+				<div>Phasellus mattis tincidunt nibh.</div>
+			</div>
+			<div>
+				<h3><a href="#">Third</a></h3>
+				<div>Nam dui erat, auctor a, dignissim quis.</div>
+			</div>
+		</div>
+-->
+		<!-- Tabs -->
+		<div id="tabs">
+			<ul>
+				<li><a href="index.html#tabs-1">Main</a></li>
+				<li><a href="index.html#tabs-2">Screenshoots</a></li>
+				<li><a href="index.html#tabs-3">Video</a></li>
+				<li><a href="index.html#tabs-starting">Starting</a></li>
+				<li><a href="index.html#tabs-4">Download</a></li>
+				<li><a href="index.html#tabs-5">Contact</a></li>
+			</ul>
+				<div id="tabs-1">
+
+					<br/>
+
+					<div class="header"> BACKGROUND:</div>
+					<div class="content">
+						EvolutionBrain is a simulation environment for randomly create neuronal networks and and check their fitness in a given environment.
+						<br/>
+						It was created as a playground for evolution driven simulations and developed as a master thesis project.
+					</div>
+					
+					
+					<div class="header"> STATE OF WORK:</div>
+					<div class="content">
+						Fully functional, but only for experts at the moment. I will add more to the "startup" guide later (look at the "Starting" menu above).<p>
+						Additionally, you may look at <a href="http://evolutionbrain.svn.sourceforge.net/viewvc/evolutionbrain/trunk/src/main/java/tw/master/MasterProofMain.java?revision=2&view=markup" target="sourceforge"><code><b>src/main/java/tw/master/MasterProofMain.java</b></code></a>.
+					</div>
+					
+					<div class="header"> DEVELOP ENVIRONMENT:</div>
+					<div class="content">
+						<ul>
+							<li>Java</li>
+							<li>Eclipse / Maven and a own Maven-Repository</li>
+							<li>Project was integrated in a Jenkins CI system</li>
+							<li>Using the subversion system</li>
+							<li>Using jUnit for tests</li>
+							<li>Start working on Checkstyle and PMD metrics for improving code quality</li>
+						</ul>
+					</div>
+					
+					<div class="header"> TODO TO COMPLETE MIGRATION FROM MY LOCALE DEVELOPMENT TO SOURCEFORGE:</div>
+					<div class="content">
+						<ul>
+							<li>Write more information in this file :-)</li>
+							<li>Put all license info's into the license file</li>
+							<li>Decide how to write "licence"...</li>
+							<li>Find a better solution for the OpenGL bindings</li>
+							<li>Use JavaWebStart</li>
+						</ul>
+					</div>
+					
+					<div class="header"> TODO FOR PROJECT:</div>
+					<div class="content">
+					<ul>
+						<li>Improve window handling</li>
+						<li>Complete codemetric maven setups</li>
+						<li>Complete javadoc ( :-) )</li>
+						<li>Implement more examples</li>
+						<li>Rename the package root from "tw.master" to something more neutral thing... (I think it
+						  doesen't matter that I am "tw" and I started this project for my master thesis :-) )</li>
+						<li>Improve website</li>
+						<li>Fix typos</li>
+					</ul>
+					</div>
+				</div>
+				<div id="tabs-2">
+					<div class="header"> SOME SCREENSHOOTS, UNSORTED YET:</div>
+					<div class="content">
+					<center>
+						<!-- If you see the following code, please forgive me.... :-) -->
+						<a href="images/screendumps/Crawler.png" target="image"> <img class="screendump" src="images/screendumps/Crawler.png" height="200px"></a><p>
+						<a href="images/screendumps/ActivationFunctions.png"				target="image"> <img class="screendump" src="images/screendumps/ActivationFunctions.png"				height="200px"></a><p>
+						<a href="images/screendumps/Dump-BrainComplex.png"					target="image"> <img class="screendump" src="images/screendumps/Dump-BrainComplex.png"					height="200px"></a><p>
+						<a href="images/screendumps/Dump-BrainControl.png"					target="image"> <img class="screendump" src="images/screendumps/Dump-BrainControl.png"					height="200px"></a><p>
+						<a href="images/screendumps/Dump-Control.png"						target="image"> <img class="screendump" src="images/screendumps/Dump-Control.png"						height="200px"></a><p>
+						<a href="images/screendumps/Dump-Genotype.png"						target="image"> <img class="screendump" src="images/screendumps/Dump-Genotype.png"						height="200px"></a><p>
+						<a href="images/screendumps/Dump-Image-Small.png"					target="image"> <img class="screendump" src="images/screendumps/Dump-Image-Small.png"					height="200px"></a><p>
+						<a href="images/screendumps/Dump-Phenotype.png"						target="image"> <img class="screendump" src="images/screendumps/Dump-Phenotype.png"						height="200px"></a><p>
+						<a href="images/screendumps/Dump-SelectedCrawler-Small.png"			target="image"> <img class="screendump" src="images/screendumps/Dump-SelectedCrawler-Small.png"			height="200px"></a><p>
+						<a href="images/screendumps/Dump-Server.png"						target="image"> <img class="screendump" src="images/screendumps/Dump-Server.png"						height="200px"></a><p>
+						<a href="images/screendumps/Dump-ServerEngine.png"					target="image"> <img class="screendump" src="images/screendumps/Dump-ServerEngine.png"					height="200px"></a><p>
+						<a href="images/screendumps/Dump-Status.png"						target="image"> <img class="screendump" src="images/screendumps/Dump-Status.png"						height="200px"></a><p>
+						<a href="images/screendumps/MutationTree.png"						target="image"> <img class="screendump" src="images/screendumps/MutationTree.png"						height="200px"></a><p>
+						<a href="images/screendumps/Selected-Crawkler-EEG.png"				target="image"> <img class="screendump" src="images/screendumps/Selected-Crawkler-EEG.png"				height="200px"></a><p>
+						<a href="images/screendumps/Selected-Crawkler-Fitness.png"			target="image"> <img class="screendump" src="images/screendumps/Selected-Crawkler-Fitness.png"			height="120px"></a><p>
+						<a href="images/screendumps/Selected-Crawkler-Way-Stability.png"	target="image"> <img class="screendump" src="images/screendumps/Selected-Crawkler-Way-Stability.png"	height="200px"></a><p>
+						<a href="images/screendumps/Selected-Crawkler-Way-Trace.png"		target="image"> <img class="screendump" src="images/screendumps/Selected-Crawkler-Way-Trace.png"		height="200px"></a><p>
+						<a href="images/screendumps/SignumActivation.png"					target="image"> <img class="screendump" src="images/screendumps/SignumActivation.png"					height="200px"></a><p>
+						<a href="images/screendumps/Umwelt-Ausschnitt-Gross.png"			target="image"> <img class="screendump" src="images/screendumps/Umwelt-Ausschnitt-Gross.png"				height="200px"></a><p>
+						<a href="images/screendumps/Umwelt-Ausschnitt.png"					target="image"> <img class="screendump" src="images/screendumps/Umwelt-Ausschnitt.png"					height="200px"></a><p>
+						<a href="images/screendumps/brain-000002000.png"					target="image"> <img class="screendump" src="images/screendumps/brain-000002000.png"					height="200px"></a><p>
+					</center>
+				</div>
+
+				</div>
+				
+				<div id="tabs-3">
+					<div class="header"> VIDEO:</div>
+					<div class="content">
+						<center>
+							<br/>
+							<video width=80% controls poster="videos/tracefollow.jpg">
+								<source src="videos/tracefollow.mp4" type="video/mp4">
+								<source src="videos/tracefollow.ogg" type="video/ogg">
+								This browser is not compatible with HTML 5, sorry....
+							</video>
+							<br/>
+							Direct video link: <a href="videos/tracefollow.mp4">MP4</a>  <a href="videos/tracefollow.ogg">OGG</a>
+						</center>
+					</div>
+				</div>
+
+				<div id="tabs-starting">
+					<div class="header"> PRECONDITIONS:</div>
+					<div class="content">
+						<ul>
+							<li><a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="java">Java 6</a></li>
+							<li><a href="http://www.eclipse.org/" target="eclipse">Eclipse (with installed maven and subversion plugin)</a></li>
+							<li><a href="http://maven.apache.org/download.html" target="maven">Maven 3</a></li>
+							<li>Currently, knowledge in the areas above :-), maybe it's better to wait until the setup is finished ? :-)</li>
+						</ul>
+					</div>
+
+					<div class="header"> HOWTO:</div>
+					<div class="content">
+						<ul>
+							<li>Download and install <a href="http://jogamp.org/jogl/www/" target="jogl">jogl</a> (OpenGL bindings for Java)</li>
+							<li>Download this project from <a href="http://sourceforge.net/scm/?type=svn&group_id=540507" target="sourceforge">SVN</a></li>
+							<li>Create a Eclipse project and connect the native libs</li>
+							<li>Alternatively: Wait until I have setup the project & scripts :-) </li>
+						</ul>
+					</div>
+
+				</div>
+
+
+				<div id="tabs-4">
+					<div class="header"> SOURCEFORGE LINKS:</div>
+					<div class="content">
+						<center>
+						<table border=0>
+							<tr>
+								<td>
+									SourceForge project site:  
+								</td>
+								<td>
+									<a href="https://sourceforge.net/projects/evolutionbrain" target="sourceforge">SourceForge EvolutionBrain</a>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									Subversion repository:
+								</td>
+								<td>
+									<a href="http://sourceforge.net/scm/?type=svn&group_id=540507" target="sourceforge">SVN</a>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									Subversion repository browsing:
+								</td>
+								<td>
+									<a href="http://evolutionbrain.svn.sourceforge.net/viewvc/evolutionbrain/trunk/" target="sourceforge">SVN browsing</a>
+								</td>
+							</tr>
+							
+						</table>
+						</center>
+					</div>
+				</div>
+
+				<div id="tabs-5">
+					<div class="header"> CONTACT:</div>
+					<div class="content">
+						For more information, feel free to contact me at:<p><p>
+						<b>ttww ... gmx.de</b><p><p>
+					</div>
+					
+					<div class="header"> IMPRESSUM:</div>
+					<div class="impressum">
+					This private Web-Site (Homepage) is announced by:<p>
+					Thomas Welsch, Dorfackerstr. 20, 72074 Tübingen, Germany<p>
+	
+					This concerns my, Thomas Welsch, private Web Site.
+					My expressions are to be seen purely informative from my point of view.
+					I respect each contradiction and expect this, errors to be thus recognized, which I, which is valid in each case, unintentionally published.
+					The use of my Web site is intended only for the private use and it may not serve commercial purposes or in any way for that to be used.
+					</div>
+					<div class="header"> DISCLAIMER, COPYRIGHT AND RELATED RIGHTS:</div>
+					<div class="impressum">
+						  Thomas Welsch, author, reserves the right not to be responsible for the topicality, correctness, completeness or quality of the information provided.
+						Liability claims regarding damage caused by the use of any information provided, including any kind of information which is incomplete or incorrect, will therefore be rejected.
+						All offers are not-binding and without obligation.
+						Parts of the pages or the complete publication including all offers and information might be extended, changed or partly or completely deleted by Thomas Welsch without separate announcement.
+						  Thomas Welsch is not responsible for any contents linked or referred to from his pages - unless he has full knowledge of illegal contents and would be able to prevent the visitors of his site from viewing those pages. If any damage occurs by the use of information presented there, only the author of the respective pages might be liable, not the one who has linked to these pages.
+						Furthermore Thomas Welsch is not liable for any postings or messages published by users of discussion boards, guest books or mailing lists provided on his page.
+						
+						  Thomas Welsch intended not to use any copyrighted material for the publication or, if not possible, to indicate the copyright of the respective object.
+						The copyright for any material created by Thomas Welsch is reserved. Any duplication or use of objects such as images, diagrams, sounds or texts in other electronic or printed publications is not permitted without Thomas Welsch’s agreement.
+						  If the opportunity for the input of personal or business data (email addresses, name, and addresses) is given, the input of these data takes place voluntarily.
+						The use and payment of all offered services are permitted - if and so far technically possible and reasonable - without specification of any personal data or under specification of anonymized data or an alias.
+							The use of published postal addresses, telephone or fax numbers and email addresses for marketing purposes is prohibited; offenders sending unwanted spam messages will be punished.
+							This disclaimer is to be regarded as part of the internet publication which you were referred from.
+							If sections or individual terms of this statement are not legal or correct, the content or validity of the other parts remain uninfluenced by this fact.
+						<br/>
+						© 2011					
+					</div>
+
+					<div class="impressum">
+					<div class="impressum">
+					<div class="impressum">
+						<div class="header"> SORRY:</div>
+						<div class="content">
+						...for wasting your time with the silly thin<font color="orange">k</font><font color="cyan">g</font>s above :-)<p>
+					</div>
+					</div>
+					</div>
+					</div>
+
+				</div>
+				
+					
+
+		</div>
+	
+						
+		<!-- Highlight / Error -->
+<!--
+		<h2 class="demoHeaders">Highlight / Error</h2>
+		<div class="ui-widget">
+			<div class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
+				<p><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>
+				<strong>Hey!</strong> Sample ui-state-highlight style.</p>
+			</div>
+		</div>
+		<br/>
+		<div class="ui-widget">
+			<div class="ui-state-error ui-corner-all" style="padding: 0 .7em;"> 
+				<p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span> 
+				<strong>Alert:</strong> Sample ui-state-error style.</p>
+			</div>
+		</div>
+-->
+		<p>
+		Created: 2011/06/30  /  Last update: 2014/11/17  /  tw
+	</body>
+</html>
+
+

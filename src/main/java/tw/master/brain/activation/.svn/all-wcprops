@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/repo/!svn/ver/11864/develop/EvolutionBrain/src/main/java/tw/master/brain/activation
+END
+AbstractActivationFunction.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/repo/!svn/ver/14845/develop/EvolutionBrain/src/main/java/tw/master/brain/activation/AbstractActivationFunction.java
+END
+ActivationFunctionFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/repo/!svn/ver/13194/develop/EvolutionBrain/src/main/java/tw/master/brain/activation/ActivationFunctionFactory.java
+END
+SignumActivation.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/repo/!svn/ver/14845/develop/EvolutionBrain/src/main/java/tw/master/brain/activation/SignumActivation.java
+END
+ActivationFunctionInterface.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/repo/!svn/ver/12654/develop/EvolutionBrain/src/main/java/tw/master/brain/activation/ActivationFunctionInterface.java
+END
+LinearActivation.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/repo/!svn/ver/14845/develop/EvolutionBrain/src/main/java/tw/master/brain/activation/LinearActivation.java
+END

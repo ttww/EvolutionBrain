@@ -1,0 +1,116 @@
+<project name="EvolutionBrain" default="dist" basedir=".">
+	<description>
+        simple example build file
+    </description>
+	<!-- set global properties for this build -->
+	<property name="src" location="src" />
+	<property name="src.test" location="test" />
+	<property name="build" location="build" />
+	<property name="build.test" location="build_test" />
+	<property name="dist" location="dist" />
+	<property name="output" location="output" />
+
+	<target name="init">
+		<!-- Create the time stamp -->
+		<tstamp />
+		<!-- Create the build directory structure used by compile -->
+		<mkdir dir="${build}" />
+		<mkdir dir="${build.test}" />
+		<mkdir dir="${output}" />
+	</target>
+
+	<target name="compile" depends="init" description="compile the source ">
+		<!-- Compile the java code from ${src} into ${build} -->
+		<javac srcdir="${src}" destdir="${build}" includeantruntime="false">
+			<classpath path="lib/jmdns.jar" />
+			<classpath path="lib/jogl.all.jar" />
+			<classpath path="lib/gluegen-rt.jar" />
+			<classpath path="lib/nativewindow.all.jar" />
+		</javac>
+	</target>
+
+	<target name="compile_test" depends="init" description="compile the test source">
+		<!-- Compile the java code from ${src} into ${build} -->
+		<javac destdir="${build.test}" includeantruntime="false" debug="on" source="1.6">
+			<classpath path="lib/junit-4.8.2.jar" />
+			<classpath path="lib/jmdns.jar" />
+			<classpath path="lib/jogl.all.jar" />
+			<classpath path="lib/gluegen-rt.jar" />
+			<classpath path="lib/nativewindow.all.jar" />
+
+			<src path="${src}" />
+			<src path="${src.test}" />
+		</javac>
+	</target>
+
+	<target name="test" depends="compile_test" description="Doing junit tests">
+		<junit fork="yes">
+			<classpath path="lib/junit-4.8.2.jar" />
+			<classpath path="lib/jmdns.jar" />
+			<classpath path="lib/jogl.all.jar" />
+			<classpath path="lib/gluegen-rt.jar" />
+			<classpath path="lib/nativewindow.all.jar" />
+			<classpath path="${build}" />
+			<classpath path="${build.test}" />
+			<!--
+				 <classpath>
+				    <pathelement location="${build}"/>
+				    <pathelement location="${build.test}"/>
+				    <pathelement path="${java.class.path}"/>
+				  </classpath>
+-->
+
+			<formatter type="xml" />
+
+
+			<batchtest fork="yes" todir="${output}">
+				<fileset dir="${src.test}">
+					<include name="**/*Test.java" />
+					<!--  <exclude name="**/AllTests.java"/> -->
+				</fileset>
+			</batchtest>
+
+		</junit>
+	</target>
+
+	<target name="dist" depends="compile" description="generate the distribution">
+		<!-- Create the distribution directory -->
+		<mkdir dir="${dist}/lib" />
+		<mkdir dir="${dist}/images" />
+		<copy todir="${dist}/lib">
+			<fileset dir="lib" />
+		</copy>
+		<copy file="images/Trails.png" todir="${dist}/images" />
+		<copy file="images/TrailsEnergy.png" todir="${dist}/images" />
+		<copy file="Brain.png" todir="${dist}" />
+
+		<jar jarfile="${dist}/EvolutionBrain.jar" basedir="${build}" />
+	</target>
+
+	<target name="run" depends="dist" description="Run the application">
+		<exec executable="java" dir="${dist}">
+
+			<arg value="-XX:CompileThreshold=2" />
+			<arg value="-XX:+AggressiveOpts" />
+			<arg value="-XX:+UseFastAccessorMethods" />
+			<arg value="-Xdock:name=EvolutionBrain" />
+			<arg value="-Xdock:icon=Brain.png" />
+			<arg value="-Xdock:name=EvolutionBrain" />
+			<arg value="-mx1000m" />
+			<arg value="-Dsun.io.serialization.extendedDebugInfo=true" />
+			<arg value="-Djava.library.path=lib/arch/macosx-universal" />
+			<arg value="-classpath" />
+			<arg value="EvolutionBrain.jar:lib/jmdns.jar:lib/jogl.all.jar:lib/gluegen-rt.jar:lib/nativewindow.all.jar" />
+
+			<arg value="tw.master.EvolutionBrainClientMain" />
+		</exec>
+	</target>
+
+	<target name="clean" description="clean up">
+		<!-- Delete the ${build} and ${dist} directory trees -->
+		<delete dir="${build}" />
+		<delete dir="${build.test}" />
+		<delete dir="${dist}" />
+		<delete dir="${output}" />
+	</target>
+</project>

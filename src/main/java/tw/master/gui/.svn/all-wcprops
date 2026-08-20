@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/repo/!svn/ver/11969/develop/EvolutionBrain/src/main/java/tw/master/gui
+END
+CrawlerDisplay.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/repo/!svn/ver/14845/develop/EvolutionBrain/src/main/java/tw/master/gui/CrawlerDisplay.java
+END
+Brain3dDisplay.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/repo/!svn/ver/14845/develop/EvolutionBrain/src/main/java/tw/master/gui/Brain3dDisplay.java
+END
+DisplayedCounter.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/repo/!svn/ver/14845/develop/EvolutionBrain/src/main/java/tw/master/gui/DisplayedCounter.java
+END
+CrawlerTablePanel.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/repo/!svn/ver/14845/develop/EvolutionBrain/src/main/java/tw/master/gui/CrawlerTablePanel.java
+END
+EEGDiagramPanel.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/repo/!svn/ver/14845/develop/EvolutionBrain/src/main/java/tw/master/gui/EEGDiagramPanel.java
+END
+MutationParameterPanel.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/repo/!svn/ver/14845/develop/EvolutionBrain/src/main/java/tw/master/gui/MutationParameterPanel.java
+END
+BestCrawlerPanel.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/repo/!svn/ver/14845/develop/EvolutionBrain/src/main/java/tw/master/gui/BestCrawlerPanel.java
+END
+FitnessMeterPanel.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/repo/!svn/ver/14845/develop/EvolutionBrain/src/main/java/tw/master/gui/FitnessMeterPanel.java
+END
+StatusPanel.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/repo/!svn/ver/14845/develop/EvolutionBrain/src/main/java/tw/master/gui/StatusPanel.java
+END
