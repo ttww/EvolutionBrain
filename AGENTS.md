@@ -1,11 +1,13 @@
 # EvolutionBrain — Agent Info
 
 ## Status
-- **Main sources compile and `MasterProofMain` runs again** as of the modernization work described below
-  (Maven 3.9.x + JDK 17+, no parent POM, current JogAmp JOGL/GlueGen + JmDNS from Maven Central).
+- **Main sources compile and `MasterProofMain` runs again**, and **`mvn test` passes all suites** as of the
+  modernization work described below (Maven 3.9.x + JDK 17+, no parent POM, current JogAmp JOGL/GlueGen +
+  JmDNS + AssertJ-Swing from Maven Central).
 - Run it with: `mvn compile exec:java` (uses the `exec-maven-plugin` configured in [pom.xml](pom.xml), which
   also passes the `--add-opens java.desktop/sun.awt=ALL-UNNAMED` flag JOGL needs on modern JDKs).
-- Test-source compilation (`fest-swing`, `jocl`/`CLInfo.java`) is not fixed yet — see step 2 below.
+- CAUTION: running the app writes frame captures to `./film/*.png`, overwriting the original 2011 demo
+  images checked into git — run `git checkout -- film/` afterwards if you don't intend to update them.
 
 ## Background
 - This is the source code belonging to the master thesis of Thomas Welsch (project owner) from 2011
@@ -36,9 +38,9 @@
 - `javax.media.opengl.*` imports in `tw.master.gl3d.OpenGL3dImplementation`/`View` were renamed to
   `com.jogamp.opengl.*` to match the current JOGL package layout (this was the only source change JOGL's API
   evolution required).
-- Legacy artifacts also present: `build.xml` (Ant, unused/legacy now that Maven builds standalone), Eclipse
-  project files (`.project`, `.classpath`, `.checkstyle`, `.pmd`), and old Subversion metadata (`.svn/`
-  folders — leftover from the original SVN repo, now superseded by this git repo).
+- Legacy artifacts: Eclipse project files (`.project`, `.classpath`, `.checkstyle`, `.pmd`) are still present
+  (harmless, git/Maven are authoritative). The `build.xml` (Ant) and all `.svn/` directories (leftover from
+  the original SVN repo) have been removed.
 
 ## Code layout (do not restructure)
 - `src/main/java/tw/master/brain` — core neuron/synapse/brain data model (`Brain`, `Neuron`, `Synapse`,
@@ -59,24 +61,26 @@
    own constructor signature).
 2. ✅ **Replace unavailable/native dependencies with modern equivalents, keeping the same abstraction seams**
    — done for JOGL/GlueGen/JMDNS (see Build setup above); `PurJava3dImplementation` turned out to need no
-   migration at all (it's pure AWT/Graphics2D, not the deprecated Java3D API). Still open:
+   migration at all (it's pure AWT/Graphics2D, not the deprecated Java3D API).
    - `jocl`/`joal`/`nativewindow` vendored deps are unused by main sources (only `nativewindow` is a
-     transitive dep of `jogl-all` now) — `jocl` is only referenced by the test-only `CLInfo.java`.
-   - Only macOS natives are wired up in `pom.xml` so far; add `natives-linux-amd64`/`natives-windows-amd64`
-     etc. classifiers when building on those platforms.
-   - `fest-swing` (1.2, dead project) is still used by several tests (`src/test/java/tw/gui/annotiations/*`,
-     `ImagePanelTest`, `ActivationFunctionFactoryTest`) and is **not yet migrated** — test-source compilation
-     (`mvn test-compile`/`test`) will fail until it's replaced (AssertJ-Swing) or dropped, same for the
-     OpenCL-only `CLInfo.java` test.
-3. **Clean up the build** (mostly done)
-   - Dead `scm`/`distributionManagement` pointing at `develop.spontech-spine.com` and the `com.spontech`
-     parent were removed from `pom.xml`.
-   - `.svn` directories, Eclipse project files, and `build.xml` (Ant) are still present as legacy/unused —
-     left in place since git/Maven are now authoritative, but not relied upon.
+     transitive dep of `jogl-all` now) — `jocl` is only referenced by the test-only `CLInfo.java`, which now
+     depends on `org.jogamp.jocl:jocl` (test scope).
+   - `pom.xml` now selects the right JogAmp natives classifier (macOS/Linux amd64+aarch64/Windows amd64) via
+     OS-activated Maven profiles (`natives-macos`, `natives-linux-amd64`, `natives-linux-aarch64`,
+     `natives-windows`); only macOS has actually been exercised so far, the rest are best-effort.
+   - `fest-swing` (1.2, dead project) has been replaced by its maintained fork **AssertJ-Swing 3.17.1**
+     (`org.assertj:assertj-swing-junit`) across `src/test/java/tw/gui/annotiations/*`, `ImagePanelTest`, and
+     `ActivationFunctionFactoryTest` — only import package renames and switching the old public
+     `robot`/`target` fields to their `robot()`/`target()` accessor methods were needed. `mvn test` now
+     passes end-to-end.
+3. ✅ **Clean up the build** — dead `scm`/`distributionManagement` pointing at `develop.spontech-spine.com`
+   and the `com.spontech` parent were removed from `pom.xml`; all `.svn/` directories and the unused Ant
+   `build.xml` have been deleted. Eclipse project files (`.project`, `.classpath`, `.checkstyle`, `.pmd`) are
+   left in place as harmless/optional IDE metadata.
 4. ✅ **Verify behavior, not redesign it** — `mvn compile exec:java` launches `MasterProofMain`: the engine
    starts, loads `images/Trails.png`, and opens the Swing/JOGL 3D window without errors (only benign,
    internally-caught JOGL reflection warnings on the AWT thread, silenced by the `--add-opens` flag).
-   JUnit test suite has not been run yet — blocked on the `fest-swing`/`jocl` test dependency migration above.
+   `mvn test` now passes all suites (18 test classes, 0 failures/errors).
 5. **Explicitly out of scope**
    - Do not swap the custom `Brain`/`Neuron`/`Synapse` model for an external neural-network library (e.g.
      DL4J, Deeplearning libs) — the thesis's value is in its own implementation.

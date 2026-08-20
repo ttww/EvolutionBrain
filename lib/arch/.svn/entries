@@ -1,43 +1,0 @@
-10
-
-dir
-11839
-http://develop.spontech-spine.com/repo/develop/EvolutionBrain/lib/arch
-http://develop.spontech-spine.com/repo
-
-
-
-2011-03-09T15:43:42.087703Z
-10636
-tw
-
-
-svn:special svn:externals svn:needs-lock
-
-
-
-
-
-
-
-
-
-
-
-d319e7fa-3681-4c7f-be36-511f13197792
-
-linux-amd64
-dir
-
-linux-i586
-dir
-
-macosx-universal
-dir
-
-windows-amd64
-dir
-
-windows-i586
-dir
-

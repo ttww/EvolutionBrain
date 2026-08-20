@@ -14,6 +14,8 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven.compiler.release>17</maven.compiler.release>
 		<jogl.version>2.6.0</jogl.version>
+		<!-- Overridden per-OS/arch by the profiles below. -->
+		<jogl.natives.classifier>natives-macosx-universal</jogl.natives.classifier>
 	</properties>
 
 	<dependencies>
@@ -27,7 +29,7 @@
 			<groupId>org.jogamp.gluegen</groupId>
 			<artifactId>gluegen-rt</artifactId>
 			<version>${jogl.version}</version>
-			<classifier>natives-macosx-universal</classifier>
+			<classifier>${jogl.natives.classifier}</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.jogamp.jogl</groupId>
@@ -38,7 +40,7 @@
 			<groupId>org.jogamp.jogl</groupId>
 			<artifactId>jogl-all</artifactId>
 			<version>${jogl.version}</version>
-			<classifier>natives-macosx-universal</classifier>
+			<classifier>${jogl.natives.classifier}</classifier>
 		</dependency>
 
 		<dependency>
@@ -76,7 +78,7 @@
 			<groupId>org.jogamp.jocl</groupId>
 			<artifactId>jocl</artifactId>
 			<version>${jogl.version}</version>
-			<classifier>natives-macosx-universal</classifier>
+			<classifier>${jogl.natives.classifier}</classifier>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -100,5 +102,46 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<!-- Selects the right JogAmp natives jar (gluegen-rt/jogl-all/jocl classifier) for the
+	     build machine's OS/arch; only macOS is exercised so far, the others are best-effort. -->
+	<profiles>
+		<profile>
+			<id>natives-macos</id>
+			<activation>
+				<os><family>mac</family></os>
+			</activation>
+			<properties>
+				<jogl.natives.classifier>natives-macosx-universal</jogl.natives.classifier>
+			</properties>
+		</profile>
+		<profile>
+			<id>natives-linux-amd64</id>
+			<activation>
+				<os><name>Linux</name><arch>amd64</arch></os>
+			</activation>
+			<properties>
+				<jogl.natives.classifier>natives-linux-amd64</jogl.natives.classifier>
+			</properties>
+		</profile>
+		<profile>
+			<id>natives-linux-aarch64</id>
+			<activation>
+				<os><name>Linux</name><arch>aarch64</arch></os>
+			</activation>
+			<properties>
+				<jogl.natives.classifier>natives-linux-aarch64</jogl.natives.classifier>
+			</properties>
+		</profile>
+		<profile>
+			<id>natives-windows</id>
+			<activation>
+				<os><family>windows</family></os>
+			</activation>
+			<properties>
+				<jogl.natives.classifier>natives-windows-amd64</jogl.natives.classifier>
+			</properties>
+		</profile>
+	</profiles>
 
 </project>
