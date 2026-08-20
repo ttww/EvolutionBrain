@@ -25,8 +25,8 @@
 ## Build setup
 - Maven project (`pom.xml`). The old `parent` POM (`com.spontech:base-pom`, lived in a private, now-defunct
   Spontech Maven repository) has been removed; the handful of settings actually used (encoding, JDK level)
-  are now inlined directly in `pom.xml`. A snapshot of that old parent POM is kept as
-  [spontech_parent_pom.xml](spontech_parent_pom.xml) (v1.5.7) for historical reference only.
+  are now inlined directly in `pom.xml`. (A snapshot of that old parent POM and its PMD ruleset were kept
+  briefly for historical reference but have since been deleted as dead weight.)
 - `maven.compiler.release` is now `17` (was JDK 1.6).
 - The 2011 vendored native/binary jars under [lib/arch/](lib/arch/) and [lib/arch_jars/](lib/arch_jars/)
   (JOGL, GlueGen, JOCL, NativeWindow, JMDNS, per-OS/arch) are **no longer used for the main build** — `pom.xml`
