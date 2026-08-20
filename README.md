@@ -24,6 +24,17 @@ Architecture overview (from the thesis):
 
 More figures are available under [Master-Thesis/Bilder.Export/](Master-Thesis/Bilder.Export/).
 
+## Video
+
+[![Trail-following demo video](evolutionbrain_web_site/evolutionbrain.sourceforge.net/videos/tracefollow.jpg)](evolutionbrain_web_site/evolutionbrain.sourceforge.net/videos/tracefollow.mp4)
+
+Click the thumbnail above for the trail-following demo
+([MP4](evolutionbrain_web_site/evolutionbrain.sourceforge.net/videos/tracefollow.mp4) /
+[OGG](evolutionbrain_web_site/evolutionbrain.sourceforge.net/videos/tracefollow.ogg)). A second,
+longer capture of a live run is available as
+[film/AAAA_ClientImage.mp4](film/AAAA_ClientImage.mp4) /
+[film/AAAA_ClientImage.webm](film/AAAA_ClientImage.webm).
+
 ## Status
 
 Fully functional again after modernization: main sources compile, `mvn test` passes all suites,
