@@ -92,10 +92,10 @@
    original content (background, screenshots, video, getting-started, download, contact/impressum —
    legal text preserved verbatim) was migrated; download/starting sections were updated to point at
    the current GitHub repo and Maven workflow instead of the dead SourceForge/SVN links.
-7. **Media asset conversion**
-   - The `.mov` files under [film/](film/) (e.g. `AAAA_ClientImage.png.png.mov`) are legacy QuickTime
-     captures and should be converted to a modern, widely-supported format/codec (e.g. H.264/H.265 MP4 or
-     WebM) for smaller size and better compatibility with today's browsers/players.
+7. ✅ **Media asset conversion** — done. The legacy QuickTime capture
+   `film/AAAA_ClientImage.png.png.mov` (Apple Intermediate Codec, 89 MB) was converted with `ffmpeg` to
+   `film/AAAA_ClientImage.mp4` (H.264, ~6.4 MB) and `film/AAAA_ClientImage.webm` (VP9, ~7.3 MB) and the
+   original `.mov` removed.
 
 ## Repo hygiene reminder
 - After creating or editing files in this repo, stage (`git add`) and commit/push regularly instead of
