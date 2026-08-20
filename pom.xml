@@ -59,6 +59,26 @@
 			<version>4.11.0</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- Replaces the dead fest-swing (1.2); same API under org.assertj.swing.* package. -->
+		<dependency>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-swing-junit</artifactId>
+			<version>3.17.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jogamp.jocl</groupId>
+			<artifactId>jocl</artifactId>
+			<version>${jogl.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jogamp.jocl</groupId>
+			<artifactId>jocl</artifactId>
+			<version>${jogl.version}</version>
+			<classifier>natives-macosx-universal</classifier>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>

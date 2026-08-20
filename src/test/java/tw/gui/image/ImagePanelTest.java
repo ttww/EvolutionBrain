@@ -31,7 +31,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import org.fest.swing.fixture.FrameFixture;
+import org.assertj.swing.fixture.FrameFixture;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -79,7 +79,7 @@ public class ImagePanelTest {
     @AfterClass
     public static void tearDownAfterClass() throws Exception {
         frame.dispose();
-        ff.robot.cleanUpWithoutDisposingWindows();
+        ff.robot().cleanUpWithoutDisposingWindows();
     }
 
     /**

@@ -22,7 +22,7 @@ package tw.master.brain.activation;
 
 import javax.swing.JFrame;
 
-import org.fest.swing.fixture.FrameFixture;
+import org.assertj.swing.fixture.FrameFixture;
 import org.junit.Test;
 
 import tw.master.utils.Utils;
@@ -68,7 +68,7 @@ public class ActivationFunctionFactoryTest {
         Utils.sleep(100);
 
         n = name + ".Slope";
-        int org = ff.slider(n).target.getValue();
+        int org = ff.slider(n).target().getValue();
 
         ff.slider(n).slideToMinimum();
         ff.slider(n).slideToMaximum();
@@ -81,7 +81,7 @@ public class ActivationFunctionFactoryTest {
         ff.slider(n).slideTo(org);
 
         n = name + ".ShiftY";
-        org = ff.slider(n).target.getValue();
+        org = ff.slider(n).target().getValue();
 
         ff.slider(n).slideToMinimum();
         ff.slider(n).slideToMaximum();
@@ -94,7 +94,7 @@ public class ActivationFunctionFactoryTest {
         ff.slider(n).slideTo(org);
 
         f.dispose();
-        ff.robot.cleanUpWithoutDisposingWindows();
+        ff.robot().cleanUpWithoutDisposingWindows();
         //ff.close();
     }
 }

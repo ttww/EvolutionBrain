@@ -25,8 +25,8 @@ import javax.swing.JPanel;
 
 import junit.framework.Assert;
 
-import org.fest.swing.fixture.FrameFixture;
-import org.fest.swing.fixture.JSliderFixture;
+import org.assertj.swing.fixture.FrameFixture;
+import org.assertj.swing.fixture.JSliderFixture;
 import org.junit.Test;
 
 import tw.master.math.MathUtils;
@@ -86,7 +86,7 @@ public class GuiFloatAnnotationTest {
         Utils.sleep(500);
 
         frame.dispose();
-        ff.robot.cleanUpWithoutDisposingWindows();
+        ff.robot().cleanUpWithoutDisposingWindows();
     }
 
     // ---------------------------------------------------------------------------------------------

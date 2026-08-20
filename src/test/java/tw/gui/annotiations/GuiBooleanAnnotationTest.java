@@ -24,7 +24,7 @@ import javax.swing.JFrame;
 
 import junit.framework.Assert;
 
-import org.fest.swing.fixture.FrameFixture;
+import org.assertj.swing.fixture.FrameFixture;
 import org.junit.Test;
 
 import tw.master.utils.Utils;
@@ -69,7 +69,7 @@ public class GuiBooleanAnnotationTest
         Utils.sleep(500);
 
         frame.dispose();
-        ff.robot.cleanUpWithoutDisposingWindows();
+        ff.robot().cleanUpWithoutDisposingWindows();
     }
 
     @GuiInfoAnnotation(title = "Boolean-Test")
