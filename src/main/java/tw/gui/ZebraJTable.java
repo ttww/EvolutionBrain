@@ -110,7 +110,7 @@ public class ZebraJTable extends JTable {
      * @param columnNames   The column names to use
      */
     public ZebraJTable(
-            final Vector<?> rowData,
+            final Vector<? extends Vector> rowData,
             final Vector<?> columnNames) {
         super(rowData, columnNames);
     }

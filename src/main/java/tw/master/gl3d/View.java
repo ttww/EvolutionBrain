@@ -28,8 +28,8 @@
 
 package tw.master.gl3d;
 
-import javax.media.opengl.GL2;
-import javax.media.opengl.glu.GLU;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.GLU;
 
 // Calculate the movement of the camera.
 // Here we ignore roll when moving.
