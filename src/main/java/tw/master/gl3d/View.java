@@ -35,6 +35,8 @@ import com.jogamp.opengl.glu.GLU;
 // Here we ignore roll when moving.
 public class View {
 
+    private static final float MAX_PITCH = 89.0f;
+
     //////////////// Variables /////////////////////////
 
     // Update RightVec is not used for correct movement,
@@ -256,11 +258,13 @@ public class View {
 
     public void lookUp(float angle) {
         camPitch += dCamAngle * angle * factorMouseTurn;
-        if (camPitch > 360) {
-            camPitch -= 360;
+
+        // Keep pitch in a natural range to avoid flip-over while dragging.
+        if (camPitch > MAX_PITCH) {
+            camPitch = MAX_PITCH;
         }
-        if (camPitch < -360) {
-            camPitch += 360;
+        if (camPitch < -MAX_PITCH) {
+            camPitch = -MAX_PITCH;
         }
 
         calcLookatVec();

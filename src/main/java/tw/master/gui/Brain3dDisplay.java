@@ -55,7 +55,7 @@ public class Brain3dDisplay extends JPanel implements World3dDrawInterface {
 
     private long    mouseClickedMS;
 
-    private Point   startPressPos = new Point();
+    private final Point startPressPos = new Point();
 
     private long    lastDisplayed = 0;
 
@@ -225,7 +225,9 @@ public class Brain3dDisplay extends JPanel implements World3dDrawInterface {
             @Override
             public void mousePressed(MouseEvent e) {
                 //System.err.println("Press");
-                startPressPos = e.getPoint();
+                synchronized (startPressPos) {
+                    startPressPos.setLocation(e.getPoint());
+                }
             }
 
             @Override
@@ -269,28 +271,30 @@ public class Brain3dDisplay extends JPanel implements World3dDrawInterface {
                 // System.err.println("Drag");
 
                 View view = w3d.getView();
+                Point current = e.getPoint();
 
                 synchronized (startPressPos) {
-                    int diffX = e.getPoint().x - startPressPos.x;
-                    int diffY = e.getPoint().y - startPressPos.y;
+                    int diffX = current.x - startPressPos.x;
+                    int diffY = current.y - startPressPos.y;
 
-                    if ((e.getModifiers() & InputEvent.SHIFT_MASK) != 0) {
-                        view.moveUp(diffY);
-                        view.moveLeft(diffX);
+                    if ((e.getModifiersEx() & InputEvent.SHIFT_DOWN_MASK) != 0) {
+                        if (view != null) {
+                            // Pan speed is scaled down to avoid jumpy translation.
+                            float panScale = 0.5f;
+                            view.moveUp(diffY * panScale);
+                            view.moveLeft(diffX * panScale);
+                        }
                     }
                     else {
                         autoRot = false;
-                        float f = 20f;
 
                         if (view != null) {
-                            if (diffX < 0) view.lookLeft(f);
-                            if (diffX > 0) view.lookRight(f);
-                            if (diffY < 0) view.lookUp(f);
-                            if (diffY > 0) view.lookDown(f);
+                            // Use pixel delta directly to make drag direction and speed feel natural.
+                            view.lookRight(diffX);
+                            view.lookDown(diffY);
                         }
                     }
-                    startPressPos.x = e.getPoint().x;
-                    startPressPos.y = e.getPoint().y;
+                    startPressPos.setLocation(current);
                 }
             }
 
