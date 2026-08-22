@@ -38,7 +38,9 @@ import tw.master.mutation.MutationParameter;
  */
 public class GuiMutationPhenotypeParameterHandler {
 
-    private final MutationParameter	mp;
+    private MutationParameter	mp;
+
+    private final GuiFloatHandler	valueHandler;
 
     // ---------------------------------------------------------------------------------------------
 
@@ -67,7 +69,8 @@ public class GuiMutationPhenotypeParameterHandler {
             String				format
     ) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         this.mp = mp;
-        new GuiFloatHandler(p, y, this.getClass(), this, "Value", label, tooltip, mp.getMin(), mp.getMax(), format);
+        valueHandler = new GuiFloatHandler(p, y, this.getClass(), this, "Value", label, tooltip, mp.getMin(),
+                mp.getMax(), format);
     }
 
     // ---------------------------------------------------------------------------------------------
@@ -85,6 +88,20 @@ public class GuiMutationPhenotypeParameterHandler {
      */
     public float getValue() {
         return mp.getValue();
+    }
+
+    // ---------------------------------------------------------------------------------------------
+
+    /**
+     * Rebinds this handler to a different MutationParameter (e.g. when the watched crawler
+     * changes) and refreshes the slider to show its current value in place, without
+     * destroying/recreating the underlying JSlider component.
+     *
+     * @param mp   The new MutationParameter to display
+     */
+    public void setMutationParameter(MutationParameter mp) {
+        this.mp = mp;
+        valueHandler.refresh();
     }
 
 }   // of class GuiMutationPhenotypeParameterHandler

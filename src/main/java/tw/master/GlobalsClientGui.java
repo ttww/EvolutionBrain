@@ -44,11 +44,13 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSlider;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import tw.gui.GuiUtils;
+import tw.gui.SafeRepaintManager;
 import tw.gui.annotiations.AnnotationGuiGenerator;
 import tw.gui.image.EventInterface;
 import tw.gui.image.ImagePanel;
@@ -63,7 +65,10 @@ import tw.master.engine.EngineEventsInterface.ServerEvent;
 import tw.master.gui.BestCrawlerPanel;
 import tw.master.gui.Brain3dDisplay;
 import tw.master.gui.CrawlerDisplay;
+import tw.master.gui.MutationParameterPanel;
+import tw.master.gui.MutationParameterPanel.MutationPatameterType;
 import tw.master.gui.StatusPanel;
+import tw.master.mutation.MutationParameters;
 import tw.master.remote.AvailableServersPanel;
 import tw.master.tree.CrawlerTreePanel;
 import tw.master.tree.TreePanel;
@@ -103,6 +108,10 @@ public class GlobalsClientGui implements EventInterface, EngineEventsInterface {
 
     private final CrawlerDisplay    crawlerDisplay;
 
+    private CrawlerTreePanel        crawlerTreePanel;
+
+    private JFrame                  mppGenoFrame;
+
     private Thread                  stepCountThread;
 
     private Thread                  saveThread;
@@ -114,6 +123,10 @@ public class GlobalsClientGui implements EventInterface, EngineEventsInterface {
     public JCheckBox                disableDrawCB;
 
     private final JSlider           crawlerSlider;
+
+    private JSlider                 cpuSlider;
+
+    private JScrollPane             crawlerControlsScrollPane;
 
 
     /**
@@ -131,6 +144,15 @@ public class GlobalsClientGui implements EventInterface, EngineEventsInterface {
      * @throws Exception    ...
      */
     public GlobalsClientGui(final Engine engine) throws Exception {
+
+        SafeRepaintManager.install();
+
+        // Apple's AquaSliderUI has a longstanding internal race that can NPE
+        // (BasicSliderUI.recalculateIfInsetsChanged - "this.slider"/"this.focusRect" is null) under
+        // heavy repaint load. Force the JDK's own cross-platform slider UI for plain JSliders
+        // instead (RangeSlider already installs its own UI and is unaffected). Must happen before
+        // any JSlider is constructed.
+        UIManager.put("SliderUI", "javax.swing.plaf.basic.BasicSliderUI");
 
         try {
             PreferencesUtils.setPreferencesRoot("EvolutionBrain");
@@ -254,6 +276,7 @@ public class GlobalsClientGui implements EventInterface, EngineEventsInterface {
             @Override
             public void actionPerformed(ActionEvent e) {
                 disableDraw = disableDrawCB.isSelected();
+                updateDrawStoppedTitles();
                 refresh();
             }
         });
@@ -349,7 +372,7 @@ public class GlobalsClientGui implements EventInterface, EngineEventsInterface {
         });
 
         GuiUtils.addLabels(ctrlPanel, y++, "Calc. threads:");
-        final JSlider cpuSlider = GuiUtils.addSlider(ctrlPanel, y++);
+        cpuSlider = GuiUtils.addSlider(ctrlPanel, y++);
         cpuSlider.setMinimum(1);
         cpuSlider.setMaximum(cpus * 2);
         cpuSlider.setMajorTickSpacing(1);
@@ -522,7 +545,16 @@ public class GlobalsClientGui implements EventInterface, EngineEventsInterface {
         this.crawlerDisplay = new CrawlerDisplay(this);
         addToOpenFrames(GuiUtils.showBean(crawlerDisplay, "SelectedCrawler"));
 
-        addToOpenFrames(GuiUtils.showBean(new CrawlerTreePanel(engine), "Mutation tree"));
+        // The Genotype panel only reflects the static mutation bounds (not a specific crawler's
+        // current values), so it is shown right away instead of waiting for the first watched
+        // crawler.
+        MutationParameterPanel mppGeno = new MutationParameterPanel(new MutationParameters(),
+                MutationPatameterType.GenoType);
+        mppGenoFrame = Utils.showBean(mppGeno, "Genotype mutation parameter", false);
+        addToOpenFrames(mppGenoFrame);
+
+        this.crawlerTreePanel = new CrawlerTreePanel(this);
+        addToOpenFrames(GuiUtils.showBean(crawlerTreePanel, "Mutation tree"));
 
         engine.enableRemoteEngines();
         AvailableServersPanel availableServersPanel = new AvailableServersPanel(engine);
@@ -533,9 +565,9 @@ public class GlobalsClientGui implements EventInterface, EngineEventsInterface {
 
 
         JPanel bp = AnnotationGuiGenerator.generateComponent(engine.crawlerClass);
-        JScrollPane scrollPane = new JScrollPane(bp);
+        crawlerControlsScrollPane = new JScrollPane(bp);
 
-        addToOpenFrames(GuiUtils.showBean(scrollPane, AnnotationGuiGenerator.getClassTitle(engine.crawlerClass)));
+        addToOpenFrames(GuiUtils.showBean(crawlerControlsScrollPane, AnnotationGuiGenerator.getClassTitle(engine.crawlerClass)));
 
         initDone = true;
 
@@ -625,6 +657,29 @@ public class GlobalsClientGui implements EventInterface, EngineEventsInterface {
             }
             c = c.getParent();
         }
+    }
+
+    // ---------------------------------------------------------------------------------------------
+
+    /**
+     * Marks/unmarks the title of the WatchedBrain, SelectedCrawler and Mutation tree windows with
+     * "(Drawing STOPPED)", reflecting the current state of {@link #disableDraw}.
+     */
+    public void updateDrawStoppedTitles() {
+        SwingUtilities.invokeLater(new Runnable() {
+
+            @Override
+            public void run() {
+                GuiUtils.setDrawingStoppedTitle(b3d, disableDraw);
+                GuiUtils.setDrawingStoppedTitle(crawlerDisplay, disableDraw);
+                if (crawlerTreePanel != null) GuiUtils.setDrawingStoppedTitle(crawlerTreePanel, disableDraw);
+
+                if (mppGenoFrame != null) GuiUtils.setDrawingStoppedTitle(mppGenoFrame, disableDraw);
+
+                JFrame mppFrame = crawlerDisplay.getMppFrame();
+                if (mppFrame != null) GuiUtils.setDrawingStoppedTitle(mppFrame, disableDraw);
+            }
+        });
     }
 
     // ---------------------------------------------------------------------------------------------
@@ -740,34 +795,49 @@ public class GlobalsClientGui implements EventInterface, EngineEventsInterface {
 //	}
 
     @Override
-    public final void serverEvent(ServerEvent se, Crawler c) {
-        switch (se) {
-            case WatchedChanged:
-                if (engine.watchedCrawler instanceof AbstractBrainCrawler) {
-                    AbstractBrainCrawler ac = (AbstractBrainCrawler) engine.watchedCrawler;
+    public final void serverEvent(final ServerEvent se, final Crawler c) {
+        // Engine events can be fired from background threads (e.g. RunQueueFillerThread,
+        // loadThread) - marshal all Swing-touching work onto the EDT to avoid races with painting
+        // (was causing sporadic NullPointerExceptions in the Swing UI delegates).
+        SwingUtilities.invokeLater(new Runnable() {
 
-                    b3d.setWatchedBrain(ac.getBrain());
-                }
-                crawlerDisplay.setWatchedCrawler(engine.watchedCrawler);
+            @Override
+            public void run() {
+                switch (se) {
+                    case WatchedChanged:
+                        if (engine.watchedCrawler instanceof AbstractBrainCrawler) {
+                            AbstractBrainCrawler ac = (AbstractBrainCrawler) engine.watchedCrawler;
 
-                break;
+                            b3d.setWatchedBrain(ac.getBrain());
+                        }
+                        crawlerDisplay.setWatchedCrawler(engine.watchedCrawler);
 
-            case CrawlerLoaded:
+                        break;
 
-                System.err.println("LOADED !");
-                ip.setImage(engine.img);
-//					ip.refresh();
-                crawlerSlider.setValue(engine.numberOfCrawlers);
+                    case CrawlerLoaded:
 
-                statusPanel.updateLabels();
+                        System.err.println("LOADED !");
+                        ip.setImage(engine.img);
+//							ip.refresh();
+                        crawlerSlider.setValue(engine.numberOfCrawlers);
+                        cpuSlider.setValue(engine.wantWorker);
 
-                break;
-            default:
-                break;
+                        try {
+                            crawlerControlsScrollPane.setViewportView(
+                                    AnnotationGuiGenerator.generateComponent(engine.crawlerClass));
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
 
+                        statusPanel.updateLabels();
 
-        } // switch
+                        break;
+                    default:
+                        break;
 
+                } // switch
+            }
+        });
     }
 
     // ---------------------------------------------------------------------------------------------
@@ -896,6 +966,7 @@ public class GlobalsClientGui implements EventInterface, EngineEventsInterface {
             public void run() {
                 CrawlerDisplay cd = new CrawlerDisplay(GlobalsClientGui.this);
                 addToOpenFrames(GuiUtils.showBean(cd, "SelectedCrawler " + c.getName()));
+                GuiUtils.setDrawingStoppedTitle(cd, disableDraw);
                 cd.setWatchedCrawler(c);
             }
         });

@@ -20,13 +20,16 @@
 package tw.master.gui;
 
 import java.awt.BorderLayout;
+import java.lang.reflect.Field;
+import java.util.Map;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import tw.gui.annotiations.AnnotationGuiGenerator;
+import tw.gui.annotiations.AnnotationGuiGenerator.PhenotypeComponent;
 import tw.gui.annotiations.GuiMutationGenotypeParameterAnnotation;
-import tw.gui.annotiations.GuiMutationPhenotypeParameterAnnotation;
+import tw.gui.annotiations.GuiMutationPhenotypeParameterHandler;
 import tw.master.mutation.MutationParameters;
 
 
@@ -41,13 +44,19 @@ public class MutationParameterPanel extends JPanel {
 
     private	MutationPatameterType	which;
 
+    /**
+     * Field-to-handler map for the PhenoType case, so subsequent updates can push new values into
+     * the existing sliders in place instead of destroying/recreating them (see updatePanel()).
+     */
+    private Map<Field, GuiMutationPhenotypeParameterHandler> phenotypeHandlers;
+
 
     public MutationParameterPanel(MutationParameters mutationParameters,MutationPatameterType which) {
         super(new BorderLayout());
 
         this.which = which;
 
-        lastPanel = getPanel(mutationParameters);
+        lastPanel = buildPanel(mutationParameters);
 
         scrollPane = new JScrollPane(lastPanel);
 
@@ -55,7 +64,7 @@ public class MutationParameterPanel extends JPanel {
 
     }
 
-    private JPanel getPanel(MutationParameters mutationParameters) {
+    private JPanel buildPanel(MutationParameters mutationParameters) {
         JPanel ret = null;
 
         try {
@@ -64,7 +73,9 @@ public class MutationParameterPanel extends JPanel {
                     ret = AnnotationGuiGenerator.generateComponent(mutationParameters.getClass(),GuiMutationGenotypeParameterAnnotation.class);
                     break;
                 case PhenoType:
-                    ret = AnnotationGuiGenerator.generateComponent(mutationParameters,GuiMutationPhenotypeParameterAnnotation.class);
+                    PhenotypeComponent pc = AnnotationGuiGenerator.generatePhenotypeComponent(mutationParameters);
+                    ret = pc.panel;
+                    phenotypeHandlers = pc.handlers;
                     break;
                 default:
                     break;
@@ -75,10 +86,21 @@ public class MutationParameterPanel extends JPanel {
         return ret;
     }
 
+    /**
+     * Updates the panel to reflect a different MutationParameters object.<p>
+     * For PhenoType, the existing sliders are updated in place (no JSlider is destroyed/recreated,
+     * which is fragile under Aqua LookAndFeel when done frequently, e.g. every time the watched
+     * crawler changes). GenoType still rebuilds the panel, as it is not refreshed repeatedly.
+     */
     public void updatePanel(MutationParameters mutationParameters) {
 
         try {
-            JPanel p = getPanel(mutationParameters);
+            if (which == MutationPatameterType.PhenoType && phenotypeHandlers != null) {
+                AnnotationGuiGenerator.rebindPhenotypeComponent(phenotypeHandlers, mutationParameters);
+                return;
+            }
+
+            JPanel p = buildPanel(mutationParameters);
 
             scrollPane.remove(lastPanel);
             lastPanel = p;

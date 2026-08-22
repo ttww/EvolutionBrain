@@ -238,6 +238,33 @@ public final class GuiUtils {
 
     // ---------------------------------------------------------------------------------------------
 
+    private static final String DRAWING_STOPPED_SUFFIX = " (Drawing STOPPED)";
+
+    /**
+     * Add or remove the "(Drawing STOPPED)" marker on the title of the JFrame containing the given
+     * component. Must be called on the EDT.
+     *
+     * @param c         Component whose enclosing JFrame's title should be updated
+     * @param stopped   true to mark drawing as stopped, false to clear the marker
+     */
+    public static void setDrawingStoppedTitle(Component c, boolean stopped) {
+        java.awt.Window w = SwingUtilities.getWindowAncestor(c);
+        if (!(w instanceof JFrame)) return;
+
+        JFrame frame = (JFrame) w;
+        String title = frame.getTitle();
+        boolean has = title.endsWith(DRAWING_STOPPED_SUFFIX);
+
+        if (stopped && !has) {
+            frame.setTitle(title + DRAWING_STOPPED_SUFFIX);
+        }
+        else if (!stopped && has) {
+            frame.setTitle(title.substring(0, title.length() - DRAWING_STOPPED_SUFFIX.length()));
+        }
+    }
+
+    // ---------------------------------------------------------------------------------------------
+
     /**
      * Generate a random color.
      *

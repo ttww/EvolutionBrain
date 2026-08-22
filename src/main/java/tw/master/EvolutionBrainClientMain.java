@@ -33,6 +33,7 @@ import tw.master.crawler.NumberBrainCrawler;
 import tw.master.crawler.TestBrainCrawler;
 import tw.master.crawler.WalkingBrainCrawler;
 import tw.master.engine.Engine;
+import tw.master.utils.ResourceWatcherPanel;
 import tw.master.utils.TerminateListener;
 import tw.master.utils.Utils;
 
@@ -90,7 +91,7 @@ public class EvolutionBrainClientMain implements EvolutionBrainStarterInterface 
             //globalsServer.loadState();
             globals = new GlobalsClientGui(engine);
         }
-        //new ResourceWatcherPanel();
+        new ResourceWatcherPanel();
 
         if (false) {
             BufferedImage img = ImageIO.read(new File("images/Trails.png"));

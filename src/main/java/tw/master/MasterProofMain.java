@@ -28,6 +28,7 @@ import javax.imageio.ImageIO;
 
 import tw.master.crawler.WalkingBrainCrawler;
 import tw.master.engine.Engine;
+import tw.master.utils.ResourceWatcherPanel;
 import tw.master.utils.TerminateListener;
 import tw.master.utils.Utils;
 
@@ -78,6 +79,8 @@ public class MasterProofMain implements EvolutionBrainStarterInterface {
         engine.startPos = new Point.Float(img.getWidth() * 0.77f, img.getHeight() * 0.77f);
 
         new GlobalsClientGui(engine);
+
+        new ResourceWatcherPanel();
     }
 
     // ---------------------------------------------------------------------------------------------

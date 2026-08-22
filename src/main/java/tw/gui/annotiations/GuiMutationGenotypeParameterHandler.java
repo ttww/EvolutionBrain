@@ -132,8 +132,11 @@ public class GuiMutationGenotypeParameterHandler extends BasicHandler implements
         cs.setPaintLabels(true);
 
 
-        cs.putClientProperty("JComponent.sizeVariant", "mini");
-        cs.putClientProperty("Slider.paintThumbArrowShape", Boolean.TRUE);
+        // Looks better on the mac, but triggers an Null-Pointer-Exeption in
+        // javax.swing.plaf.basic.BasicSliderUI.calculateFocusRect() about focusRect during
+        // serialization.... (see GuiFloatHandler)
+        //	cs.putClientProperty("JComponent.sizeVariant", "mini");
+        //	cs.putClientProperty("Slider.paintThumbArrowShape", Boolean.TRUE);
 
         if (tooltip != null) {
             cs.setToolTipText(tooltip);

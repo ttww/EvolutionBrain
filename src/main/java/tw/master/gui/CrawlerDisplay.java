@@ -37,6 +37,7 @@ import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
+import tw.gui.GuiUtils;
 import tw.gui.image.ArrayPanel;
 import tw.gui.image.ImagePanel;
 import tw.master.GlobalsClientGui;
@@ -259,17 +260,15 @@ public class CrawlerDisplay extends JPanel implements UpdateListenerInterface {
                 @Override
                 public void run() {
                     if (mpp == null) {
-                        MutationParameterPanel mppGeno = new MutationParameterPanel(mci.getMutationParameter(),
-                                MutationPatameterType.GenoType);
-                        mppGenoFrame = Utils.showBean(mppGeno, "Genotype mutation parameter", false);
-
                         mpp = new MutationParameterPanel(mci.getMutationParameter(), MutationPatameterType.PhenoType);
                         mppFrame = Utils.showBean(mpp, "Phenotype mutation parameter", false);
+
+                        GuiUtils.setDrawingStoppedTitle(mppFrame, globals.disableDraw);
                     }
-                    else {
+                    else if (!globals.disableDraw) {
+                        // In-place value refresh (see MutationParameterPanel.updatePanel()) - no
+                        // revalidate()/repaint() needed here, each slider repaints itself.
                         mpp.updatePanel(mci.getMutationParameter());
-                        mpp.revalidate();
-                        mpp.repaint();
                     }
                 }
             });
@@ -281,8 +280,11 @@ public class CrawlerDisplay extends JPanel implements UpdateListenerInterface {
         doUpdate();
     }
 
-    private JFrame mppGenoFrame;
     private JFrame mppFrame;
+
+    public JFrame getMppFrame() {
+        return mppFrame;
+    }
 
     private void updateLabels() {
         if (watchedCrawler == null) return;
@@ -302,6 +304,21 @@ public class CrawlerDisplay extends JPanel implements UpdateListenerInterface {
 
     @Override
     public void doUpdate() {
+        if (SwingUtilities.isEventDispatchThread()) {
+            doUpdateOnEDT();
+        }
+        else {
+            SwingUtilities.invokeLater(new Runnable() {
+
+                @Override
+                public void run() {
+                    doUpdateOnEDT();
+                }
+            });
+        }
+    }
+
+    private void doUpdateOnEDT() {
 
         if (watchedCrawler == null) return;
 
@@ -351,10 +368,10 @@ public class CrawlerDisplay extends JPanel implements UpdateListenerInterface {
      * Free all resources (close JFrames opened from this class).
      */
     public void disposeAll() {
-        mppGenoFrame.setVisible(false);
-        mppFrame.setVisible(false);
-        mppGenoFrame.dispose();
-        mppFrame.dispose();
+        if (mppFrame != null) {
+            mppFrame.setVisible(false);
+            mppFrame.dispose();
+        }
     }
 
 }

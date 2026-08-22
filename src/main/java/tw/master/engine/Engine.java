@@ -30,12 +30,15 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import tw.gui.annotiations.AnnotationGuiGenerator;
 import tw.master.crawler.Crawler;
 import tw.master.crawler.CrawlerList;
 import tw.master.crawler.CrawlerThread;
@@ -282,8 +285,8 @@ public class Engine implements UpdateListenerInterface {
 
             System.err.println("Write metadata...");
 
-            // Version
-            obj_out.writeObject(1);
+            // Version - 2: added wantWorker and static annotated crawler-class GUI values
+            obj_out.writeObject(2);
 
             obj_out.writeObject(this.handeldNeurons);
             obj_out.writeObject(this.handeldSynapses);
@@ -311,6 +314,9 @@ public class Engine implements UpdateListenerInterface {
             obj_out.writeObject(this.bestCrawlers.getBestList());
 
             obj_out.writeObject(this.watchedCrawler);
+
+            obj_out.writeObject(this.wantWorker);
+            obj_out.writeObject(AnnotationGuiGenerator.saveStaticAnnotatedValues(this.crawlerClass));
 
             System.err.println("Write brains close...");
 
@@ -352,7 +358,7 @@ public class Engine implements UpdateListenerInterface {
             ObjectInputStream obj_in = new ObjectInputStream(f_in);
 
             // Version
-            obj_in.readObject();
+            int version = (Integer) obj_in.readObject();
 
             this.handeldNeurons = (Integer) obj_in.readObject();
             this.handeldSynapses = (Long) obj_in.readObject();
@@ -389,6 +395,13 @@ public class Engine implements UpdateListenerInterface {
             if (c != null) {
                 c.setEngine(this);
                 this.setWatchedCrawler(c);
+            }
+
+            if (version >= 2) {
+                this.wantWorker = (Integer) obj_in.readObject();
+
+                Map<String, Object> staticValues = (Map<String, Object>) obj_in.readObject();
+                AnnotationGuiGenerator.restoreStaticAnnotatedValues(this.crawlerClass, staticValues);
             }
 
             System.err.println("Read brains close...");

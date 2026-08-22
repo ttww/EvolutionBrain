@@ -56,9 +56,11 @@ public class RemoteEngine extends Thread {
 
     public boolean                       remoteIsRunning;
 
-    private boolean                      quit     = false;
+    private volatile boolean             quit     = false;
 
     private LinkedBlockingQueue<Request> requests = new LinkedBlockingQueue<Request>(1);
+
+    private AliveCheckerThread           aliveCheckerThread;
 
     public RemoteEngine(ServiceInfo service) {
         this(service, null);
@@ -85,10 +87,10 @@ public class RemoteEngine extends Thread {
 
         start();
 
-        AliveCheckerThread act = new AliveCheckerThread();
-        act.setName("Alive Checker for " + remoteName);
-        act.setDaemon(true);
-        act.start();
+        aliveCheckerThread = new AliveCheckerThread();
+        aliveCheckerThread.setName("Alive Checker for " + remoteName);
+        aliveCheckerThread.setDaemon(true);
+        aliveCheckerThread.start();
     }
 
 
@@ -510,6 +512,10 @@ public class RemoteEngine extends Thread {
         System.err.println("Set QUIT in TERMINATE ! " + Utils.getStacktrace());
 
         if (!isInterrupted()) interrupt();
+
+        if (aliveCheckerThread != null && !aliveCheckerThread.isInterrupted()) {
+            aliveCheckerThread.interrupt();
+        }
     }
 
 

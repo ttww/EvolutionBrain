@@ -101,15 +101,18 @@ public class RemoteEnginesManager implements JmDnsListener, UpdateListenerInterf
     public void serviceAppears(ServiceInfo service) {
 //		System.err.println("Appears    "+service);
 
-        RemoteEngine re = null;
-//		try {
-//			System.err.println("New    "+service);
-        re = new RemoteEngine(service, this);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
+        // JmDNS can re-announce an already-known server (e.g. while a service is still resolving,
+        // or on periodic re-announcements) - avoid spawning a duplicate RemoteEngine (and its two
+        // background threads) for a server we're already connected to.
+        synchronized (knownRemoteEngines) {
+            for (RemoteEngine re : knownRemoteEngines) {
+                if (re.service.getURL().equals(service.getURL())) return;
+            }
+        }
 
         System.err.println("Try add    " + service);
+        RemoteEngine re = new RemoteEngine(service, this);
+
         synchronized (knownRemoteEngines) {
 //			System.err.println("Add    "+service);
             knownRemoteEngines.add(re);

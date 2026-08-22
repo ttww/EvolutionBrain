@@ -234,6 +234,26 @@ class GuiFloatHandler extends BasicHandler implements ChangeListener, MouseListe
     // ---------------------------------------------------------------------------------------------
 
     /**
+     * Re-reads the current value via the bound getter and updates the slider position and format
+     * label in place, without destroying/recreating the JSlider. Used for GUI panels that are
+     * rebound to a new backing object frequently (e.g. Phenotype mutation parameters, when the
+     * watched crawler changes) - destroying/recreating JSlider components that often is fragile
+     * under Aqua LookAndFeel (see the commented-out "JComponent.sizeVariant"/"mini" properties
+     * above for a related, known JDK bug).
+     */
+    public void refresh() {
+        try {
+            float f = get();
+            cs.setValue(floatToSlider(f));
+            updateFormatLabel(f);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // ---------------------------------------------------------------------------------------------
+
+    /**
      * Hack routine for try to workaround Mac L&F slider bug....
      */
     private void validateSliderPos() {

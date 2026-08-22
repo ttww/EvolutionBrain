@@ -19,6 +19,8 @@
 
 package tw.master;
 
+import javax.swing.SwingUtilities;
+
 import tw.master.brain.Neuron;
 import tw.master.utils.GuiStartStopStepThread;
 import tw.master.utils.Utils;
@@ -50,14 +52,28 @@ public class UpdateThread extends GuiStartStopStepThread {
             boolean isFrontmost = Utils.isFrontmostApplication();
             if (wasFrontmost) {
                 if (!lglobals.disableDraw && !isFrontmost) {
-                    lglobals.disableDrawCB.setSelected(true);
-                    lglobals.disableDraw = true;
                     switchedOff = true;
+                    SwingUtilities.invokeLater(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            lglobals.disableDrawCB.setSelected(true);
+                            lglobals.disableDraw = true;
+                            lglobals.updateDrawStoppedTitles();
+                        }
+                    });
                 }
                 if (lglobals.disableDraw && isFrontmost && switchedOff) {
-                    lglobals.disableDrawCB.setSelected(false);
-                    lglobals.disableDraw = false;
                     switchedOff = false;
+                    SwingUtilities.invokeLater(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            lglobals.disableDrawCB.setSelected(false);
+                            lglobals.disableDraw = false;
+                            lglobals.updateDrawStoppedTitles();
+                        }
+                    });
                 }
 
             }
@@ -102,12 +118,19 @@ public class UpdateThread extends GuiStartStopStepThread {
         long actStep = lglobals.engine.steps.getCounter();
         if (lastStep != actStep || lglobals.forceRefresh) {
             lastStep = actStep;
-            if (!lglobals.disableDraw) {
-                lglobals.ip.refresh();
-            }
-            //System.err.println("actStep = "+actStep);
-            lglobals.statusPanel.updateLabels();
             lglobals.forceRefresh = false;
+
+            SwingUtilities.invokeLater(new Runnable() {
+
+                @Override
+                public void run() {
+                    if (!lglobals.disableDraw) {
+                        lglobals.ip.refresh();
+                    }
+                    //System.err.println("actStep = "+actStep);
+                    lglobals.statusPanel.updateLabels();
+                }
+            });
         }
 
 

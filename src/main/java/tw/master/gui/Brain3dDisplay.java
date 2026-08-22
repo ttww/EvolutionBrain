@@ -32,8 +32,10 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 
+import tw.gui.GuiUtils;
 import tw.master.GlobalsClientGui;
 import tw.master.brain.Brain;
 import tw.master.gl3d.Panel3dFactory;
@@ -85,6 +87,8 @@ public class Brain3dDisplay extends JPanel implements World3dDrawInterface {
 
     private boolean restorePos1;
 
+    private boolean lastDrawStopped;
+
     // ---------------------------------------------------------------------------------------------
 
     /**
@@ -125,8 +129,20 @@ public class Brain3dDisplay extends JPanel implements World3dDrawInterface {
 
             @Override
             public void doStep(GlobalsClientGui lglobals) {
-//				if (!lglobals.disableDraw) ((OpenGL3dImplementation)watchPanel).canvas.display();
-//                ((OpenGL3dImplementation) watchPanel).canvas.display();
+                boolean stopped = lglobals.disableDraw;
+                if (stopped != lastDrawStopped) {
+                    lastDrawStopped = stopped;
+                    SwingUtilities.invokeLater(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            GuiUtils.setDrawingStoppedTitle(Brain3dDisplay.this, stopped);
+                        }
+                    });
+                }
+
+                if (stopped) return;
+
                 ((World3dInterface) watchPanel).refresh();
             }
         };

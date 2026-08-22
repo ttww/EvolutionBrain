@@ -23,12 +23,16 @@ import java.awt.BorderLayout;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import javax.swing.JPanel;
 
 import tw.gui.GridBagStripePanel;
 import tw.master.mutation.GenotypeParameter;
 import tw.master.mutation.MutationParameter;
+import tw.master.mutation.MutationParameters;
 import tw.master.utils.Utils;
 
 
@@ -169,6 +173,184 @@ public final class AnnotationGuiGenerator {
             if (a.annotationType() == c) return true;
         }
         return false;
+    }
+
+    // ---------------------------------------------------------------------------------------------
+
+    /**
+     * Collects the current values of all static @GuiFloatAnnotation/@GuiBooleanAnnotation/
+     * @GuiEnumAnnotation annotated getter/setter pairs of the given class, keyed by field name.
+     * Used to persist "global" GUI controls (e.g. WalkingBrainControls) across
+     * {@code Engine.saveState()}/{@code loadState()}.
+     *
+     * @param c   Class to scan (typically engine.crawlerClass)
+     *
+     * @return    Map of field name to current value (Float/Boolean/Enum), in a serializable form
+     */
+    public static LinkedHashMap<String, Object> saveStaticAnnotatedValues(Class<?> c) {
+        LinkedHashMap<String, Object> ret = new LinkedHashMap<String, Object>();
+
+        for (Method m : c.getMethods()) {
+            if (!Modifier.isStatic(m.getModifiers())) continue;
+
+            boolean relevant = false;
+            for (Annotation a : m.getAnnotations()) {
+                if (a instanceof GuiFloatAnnotation || a instanceof GuiBooleanAnnotation
+                        || a instanceof GuiEnumAnnotation) {
+                    relevant = true;
+                    break;
+                }
+            }
+            if (!relevant) continue;
+
+            String name = m.getName();
+            int idx;
+            if (name.startsWith("is")) idx = 2;
+            else if (name.startsWith("get") || name.startsWith("set")) idx = 3;
+            else continue;
+
+            String fieldName = Character.toUpperCase(name.charAt(idx)) + name.substring(idx + 1);
+
+            try {
+                Method getter;
+                try {
+                    getter = c.getMethod("get" + fieldName, (Class[]) null);
+                } catch (NoSuchMethodException nsme) {
+                    getter = c.getMethod("is" + fieldName, (Class[]) null);
+                }
+                ret.put(fieldName, getter.invoke(null));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return ret;
+    }
+
+    // ---------------------------------------------------------------------------------------------
+
+    /**
+     * Restores values previously collected by {@link #saveStaticAnnotatedValues(Class)} by calling
+     * the matching static setter for each entry.
+     *
+     * @param c        Class to apply the values to (typically engine.crawlerClass)
+     * @param values   Field name to value map, as produced by {@link #saveStaticAnnotatedValues(Class)}
+     */
+    public static void restoreStaticAnnotatedValues(Class<?> c, Map<String, Object> values) {
+        if (values == null) return;
+
+        for (Map.Entry<String, Object> e : values.entrySet()) {
+            Object value = e.getValue();
+            if (value == null) continue;
+
+            String setterName = "set" + e.getKey();
+
+            for (Method m : c.getMethods()) {
+                if (!m.getName().equals(setterName)) continue;
+                if (!Modifier.isStatic(m.getModifiers())) continue;
+                if (m.getParameterTypes().length != 1) continue;
+
+                try {
+                    m.invoke(null, value);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+                break;
+            }
+        }
+    }
+
+    // ---------------------------------------------------------------------------------------------
+
+    /**
+     * Result of {@link #generatePhenotypeComponent(MutationParameters)}: the generated panel plus
+     * the created handlers, keyed by the MutationParameter field they were bound to, so the panel
+     * can later be rebound to a different MutationParameters object via
+     * {@link #rebindPhenotypeComponent(Map, MutationParameters)} without destroying/recreating the
+     * JSlider components (fragile under Aqua LookAndFeel when done frequently).
+     */
+    public static final class PhenotypeComponent {
+
+        public final JPanel                                             panel;
+
+        public final Map<Field, GuiMutationPhenotypeParameterHandler>   handlers;
+
+        private PhenotypeComponent(JPanel panel, Map<Field, GuiMutationPhenotypeParameterHandler> handlers) {
+            this.panel = panel;
+            this.handlers = handlers;
+        }
+    }
+
+    // ---------------------------------------------------------------------------------------------
+
+    /**
+     * Builds the Phenotype mutation-parameter panel for the given MutationParameters object,
+     * returning both the panel and the created handlers so they can be rebound to a different
+     * MutationParameters object later (see {@link #rebindPhenotypeComponent}) instead of rebuilding
+     * the whole panel from scratch.
+     *
+     * @param mutationParameters   The object to read the current MutationParameter field values from
+     *
+     * @return   The generated panel plus its field-to-handler map
+     *
+     * @throws Exception   Mostly reflection errors
+     */
+    public static PhenotypeComponent generatePhenotypeComponent(MutationParameters mutationParameters)
+            throws Exception {
+        GridBagStripePanel ret = new GridBagStripePanel();
+        ret.setName(getClassTitle(mutationParameters));
+        ret.setGridDebug(false);
+
+        LinkedHashMap<Field, GuiMutationPhenotypeParameterHandler> handlers =
+                new LinkedHashMap<Field, GuiMutationPhenotypeParameterHandler>();
+
+        int y = 0;
+        for (Field f : mutationParameters.getClass().getFields()) {
+            GuiMutationPhenotypeParameterAnnotation ma = f.getAnnotation(GuiMutationPhenotypeParameterAnnotation.class);
+            if (ma == null) continue;
+
+            try {
+                Object mp = f.get(mutationParameters);
+                if (mp == null) continue;
+
+                GuiMutationPhenotypeParameterHandler h = new GuiMutationPhenotypeParameterHandler(ret, y++,
+                        mutationParameters.getClass(), (MutationParameter) mp, ma.label(), ma.tooltip(), ma.format());
+                handlers.put(f, h);
+            } catch (NullPointerException e) {
+                // Only the static version of the field exists - already handled elsewhere.
+            } catch (Exception e) {
+                // Don't let one bad field abort the whole panel - the caller falls back to a full
+                // rebuild whenever a field is missing from the handler map, which would otherwise
+                // destroy/recreate every JSlider on every refresh instead of just the failing one.
+                e.printStackTrace();
+            }
+        }
+
+        return new PhenotypeComponent(ret, handlers);
+    }
+
+    // ---------------------------------------------------------------------------------------------
+
+    /**
+     * Rebinds a previously generated Phenotype panel (see {@link #generatePhenotypeComponent}) to a
+     * new MutationParameters object, updating each slider's value in place instead of destroying and
+     * recreating the JSlider components.
+     *
+     * @param handlers             Field-to-handler map, as produced by {@link #generatePhenotypeComponent}
+     * @param mutationParameters   The new object to read the current MutationParameter field values from
+     */
+    public static void rebindPhenotypeComponent(Map<Field, GuiMutationPhenotypeParameterHandler> handlers,
+            MutationParameters mutationParameters) {
+        for (Map.Entry<Field, GuiMutationPhenotypeParameterHandler> e : handlers.entrySet()) {
+            try {
+                Object mp = e.getKey().get(mutationParameters);
+                if (mp == null) continue;
+
+                e.getValue().setMutationParameter((MutationParameter) mp);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     // ---------------------------------------------------------------------------------------------

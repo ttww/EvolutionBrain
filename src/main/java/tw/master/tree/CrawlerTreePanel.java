@@ -24,6 +24,7 @@ import java.awt.BorderLayout;
 
 import javax.swing.JPanel;
 
+import tw.master.GlobalsClientGui;
 import tw.master.crawler.Crawler;
 import tw.master.engine.Engine;
 import tw.master.engine.EngineEventsInterface;
@@ -39,6 +40,8 @@ public class CrawlerTreePanel extends JPanel implements EngineEventsInterface {
 
     private static final long serialVersionUID = 1L;
 
+    private GlobalsClientGui  globals;
+
     private Engine            engine;
 
     private TreeTable         data;
@@ -46,10 +49,11 @@ public class CrawlerTreePanel extends JPanel implements EngineEventsInterface {
     private TreePanel         tp;
 
     /**
-     * @param engine
+     * @param globals
      */
-    public CrawlerTreePanel(Engine engine) {
-        this.engine = engine;
+    public CrawlerTreePanel(GlobalsClientGui globals) {
+        this.globals = globals;
+        this.engine = globals.engine;
 
         setLayout(new BorderLayout());
         engine.addChangeListener(this);
@@ -71,20 +75,20 @@ public class CrawlerTreePanel extends JPanel implements EngineEventsInterface {
         switch (se) {
             case CrawlerBorn:
                 data.addData(c);
-                tp.repaint();
+                if (!globals.disableDraw) tp.repaint();
                 break;
             case CrawlerDied:
                 data.delData(c);
-                tp.repaint();
+                if (!globals.disableDraw) tp.repaint();
                 break;
             case CrawlerLoaded:
                 data.clear();
                 for (Crawler ec : engine.allCrawlers)
                     data.addData(ec);
-                tp.repaint();
+                if (!globals.disableDraw) tp.repaint();
                 break;
             case WatchedChanged:
-                tp.repaint();
+                if (!globals.disableDraw) tp.repaint();
                 break;
 
             default:
